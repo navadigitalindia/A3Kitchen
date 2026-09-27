@@ -1,53 +1,61 @@
 /* ==================================================
    A3 KITCHEN — DIGITAL RESTAURANT MENU
-   Design System & Premium UI
+   Luxury Light Theme — Warm Ivory, Pure Cream & Champagne Gold
    ================================================== */
 
 :root {
-  /* Primary & Dark Navy Palette */
-  --color-navy: #071726;
-  --color-navy-deep: #040e18;
-  --color-navy-surface: #0b1f33;
-  --color-navy-card: #0f273f;
-  --color-navy-border: rgba(255, 255, 255, 0.1);
+  /* Primary Light Canvas & Cream Palette */
+  --color-canvas: #fcfbfa;
+  --color-canvas-subtle: #f6f2ea;
+  --color-canvas-card: #ffffff;
+  --color-canvas-border: #e8e2d6;
+  --color-canvas-border-subtle: #f0ebe2;
 
-  /* Secondary Cream & Ivory Palette */
-  --color-cream: #faf7f2;
-  --color-cream-soft: #f4efe6;
+  /* Legacy & Semantic Bindings */
+  --color-cream: #fcfbfa;
+  --color-cream-soft: #f6f2ea;
   --color-cream-card: #ffffff;
-  --color-cream-border: #e7e0d3;
-  --color-ivory: #fdfbf7;
+  --color-cream-border: #e8e2d6;
+  --color-ivory: #ffffff;
 
-  /* Accent - Muted Champagne Gold */
-  --color-gold: #c6a052;
-  --color-gold-hover: #d8b368;
-  --color-gold-deep: #a88235;
-  --color-gold-subtle: rgba(198, 160, 82, 0.12);
-  --color-gold-border: rgba(198, 160, 82, 0.35);
+  /* Rich Champagne & Warm Antique Gold Accents */
+  --color-gold: #b88a38;
+  --color-gold-hover: #9e742a;
+  --color-gold-deep: #87621e;
+  --color-gold-subtle: rgba(184, 138, 56, 0.08);
+  --color-gold-border: rgba(184, 138, 56, 0.3);
+  --color-gold-glow: rgba(184, 138, 56, 0.2);
 
-  /* Typography & Supporting Colors */
-  --color-charcoal: #1c242c;
-  --color-charcoal-muted: #5f6b78;
-  --color-text-on-dark: #edf1f5;
-  --color-text-muted-dark: #98a5b3;
+  /* High-Contrast Luxury Typography */
+  --color-charcoal-deep: #121820;
+  --color-charcoal: #1e2632;
+  --color-charcoal-muted: #576474;
+  --color-charcoal-light: #8290a2;
+  --color-text-main: #1e2632;
+  --color-text-muted: #576474;
+  --color-text-dim: #8290a2;
+  --color-text-on-dark: #f8fafc;
+  --color-text-muted-dark: #cbd5e1;
   --color-white: #ffffff;
 
-  /* Food Dietary Indicators (Standard FSSAI Style) */
-  --color-veg: #1e7e34;
-  --color-non-veg: #bd2130;
+  /* Food Dietary Indicators */
+  --color-veg: #16a34a;
+  --color-veg-glow: rgba(22, 163, 74, 0.2);
+  --color-non-veg: #dc2626;
+  --color-non-veg-glow: rgba(220, 38, 38, 0.2);
 
-  /* Elevation & Borders */
-  --radius-xs: 3px;
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
+  /* Elevation & Shadows */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
   --radius-pill: 9999px;
 
-  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-card: 0 3px 12px rgba(7, 23, 38, 0.05);
-  --shadow-card-hover: 0 8px 24px rgba(7, 23, 38, 0.09);
-  --shadow-dark: 0 16px 40px rgba(0, 0, 0, 0.28);
-  --shadow-modal: 0 24px 60px rgba(4, 14, 24, 0.55);
+  --shadow-subtle: 0 2px 8px rgba(30, 38, 50, 0.04);
+  --shadow-card: 0 4px 18px rgba(30, 38, 50, 0.06);
+  --shadow-card-hover: 0 14px 34px rgba(30, 38, 50, 0.12), 0 0 1px rgba(184, 138, 56, 0.4);
+  --shadow-section: 0 8px 30px rgba(30, 38, 50, 0.05);
+  --shadow-modal: 0 24px 64px rgba(18, 24, 32, 0.22);
 
   /* Spacing System (8px scale) */
   --space-1: 4px;
@@ -82,8 +90,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: var(--color-charcoal);
-  background-color: var(--color-cream);
+  color: var(--color-text-main);
+  background-color: var(--color-canvas);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -92,7 +100,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", Georgia, serif;
   font-weight: 600;
-  color: inherit;
+  color: var(--color-charcoal-deep);
   margin: 0;
 }
 
@@ -126,14 +134,25 @@ button, input, select, textarea {
 
 /* Universal Eyebrow Label */
 .eyebrow {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: "DM Sans", sans-serif;
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 2.2px;
+  letter-spacing: 2px;
   color: var(--color-gold);
   margin-bottom: var(--space-3);
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-gold);
 }
 
 /* Primary Button Component */
@@ -143,40 +162,45 @@ button, input, select, textarea {
   justify-content: center;
   height: 44px;
   padding: 0 var(--space-6);
-  background-color: var(--color-gold);
-  color: var(--color-navy-deep);
+  background: linear-gradient(135deg, #b88a38 0%, #9e742a 100%);
+  color: #ffffff;
   border: 1px solid var(--color-gold);
   border-radius: var(--radius-sm);
   font-family: "DM Sans", sans-serif;
-  font-size: 12px;
+  font-size: 12.5px;
   font-weight: 700;
-  letter-spacing: 0.8px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 4px 14px rgba(184, 138, 56, 0.25);
+  transition: all 0.25s ease;
 }
 
 .primary-button:hover {
-  background-color: var(--color-gold-hover);
+  background: linear-gradient(135deg, #9e742a 0%, #87621e 100%);
   border-color: var(--color-gold-hover);
-  color: var(--color-navy-deep);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(184, 138, 56, 0.35);
+  transform: translateY(-1px);
 }
 
 .primary-button:active {
   transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(184, 138, 56, 0.2);
 }
 
-/* Dietary Indicator Component (Pure CSS - Red Dot & Green Dot) */
+/* Dietary Indicator Component */
 .diet-indicator {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   border-radius: var(--radius-xs);
   border: 1.5px solid;
   padding: 1px;
   flex-shrink: 0;
+  background-color: #ffffff;
 }
 
 .diet-indicator.veg {
@@ -204,18 +228,18 @@ button, input, select, textarea {
 }
 
 /* ==================================================
-   HEADER
+   HEADER (Light Glassmorphism)
    ================================================== */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
   height: var(--header-height);
-  background-color: rgba(4, 14, 24, 0.98);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--color-gold-border);
-  color: var(--color-white);
+  background-color: rgba(252, 251, 250, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--color-canvas-border);
+  color: var(--color-charcoal-deep);
   transition: background-color 0.3s ease;
 }
 
@@ -239,10 +263,10 @@ button, input, select, textarea {
   height: 38px;
   border-radius: var(--radius-sm);
   border: 1.5px solid var(--color-gold);
-  background: rgba(198, 160, 82, 0.08);
+  background: var(--color-gold-subtle);
   display: grid;
   place-items: center;
-  color: var(--color-gold);
+  color: var(--color-gold-deep);
   font-family: "Playfair Display", Georgia, serif;
   font-weight: 700;
   font-size: 15px;
@@ -258,16 +282,17 @@ button, input, select, textarea {
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 1.5px;
-  color: var(--color-white);
+  color: var(--color-charcoal-deep);
   line-height: 1.15;
 }
 
 .brand-tagline {
-  font-size: 10px;
+  font-size: 10.5px;
   letter-spacing: 0.8px;
   text-transform: uppercase;
   color: var(--color-gold);
   margin-top: 2px;
+  font-weight: 600;
 }
 
 /* Desktop Navigation */
@@ -278,12 +303,13 @@ button, input, select, textarea {
 }
 
 .nav-link {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-text-on-dark);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-charcoal-muted);
   padding: calc((var(--header-height) - 20px) / 2) 0;
   position: relative;
   letter-spacing: 0.4px;
+  transition: color 0.2s ease;
 }
 
 .nav-link::after {
@@ -303,7 +329,7 @@ button, input, select, textarea {
 }
 
 .nav-link.active {
-  color: var(--color-gold);
+  color: var(--color-charcoal-deep);
 }
 
 .nav-link.active::after {
@@ -313,8 +339,8 @@ button, input, select, textarea {
 /* Mobile Toggle Button */
 .menu-toggle {
   display: none;
-  background: none;
-  border: 1px solid var(--color-gold-border);
+  background: var(--color-canvas-subtle);
+  border: 1px solid var(--color-canvas-border);
   border-radius: var(--radius-sm);
   padding: 8px 10px;
   cursor: pointer;
@@ -328,7 +354,7 @@ button, input, select, textarea {
   display: block;
   width: 20px;
   height: 2px;
-  background-color: var(--color-gold);
+  background-color: var(--color-charcoal);
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
@@ -350,13 +376,13 @@ button, input, select, textarea {
 }
 
 /* ==================================================
-   HERO SECTION (Dark Navy / Photographic)
+   HERO SECTION (Sophisticated Light Overlay)
    ================================================== */
 .hero {
   position: relative;
-  min-height: 520px;
-  background: var(--color-navy) url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85") center center / cover no-repeat;
-  color: var(--color-white);
+  min-height: 540px;
+  background: var(--color-canvas-subtle) url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85") center center / cover no-repeat;
+  color: var(--color-charcoal-deep);
   display: flex;
   align-items: center;
 }
@@ -366,9 +392,9 @@ button, input, select, textarea {
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(4, 14, 24, 0.94) 0%,
-    rgba(7, 23, 38, 0.86) 45%,
-    rgba(7, 23, 38, 0.55) 100%
+    rgba(252, 251, 250, 0.96) 0%,
+    rgba(252, 251, 250, 0.90) 50%,
+    rgba(252, 251, 250, 0.65) 100%
   );
 }
 
@@ -383,16 +409,16 @@ button, input, select, textarea {
   font-size: clamp(48px, 6.5vw, 76px);
   font-weight: 600;
   line-height: 1.05;
-  color: var(--color-ivory);
+  color: var(--color-charcoal-deep);
   margin-bottom: var(--space-4);
   letter-spacing: -0.5px;
 }
 
 .hero-subtitle {
-  font-size: 16px;
-  color: var(--color-text-on-dark);
+  font-size: 16.5px;
+  color: var(--color-charcoal);
   margin-bottom: var(--space-3);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .hero-subtitle span {
@@ -402,17 +428,17 @@ button, input, select, textarea {
 
 .location {
   font-size: 14px;
-  color: var(--color-gold);
-  letter-spacing: 0.8px;
+  color: var(--color-gold-deep);
+  letter-spacing: 1px;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: var(--space-6);
 }
 
 .qr-note {
-  font-size: 13.5px;
-  color: var(--color-text-muted-dark);
-  border-left: 2px solid var(--color-gold);
+  font-size: 14px;
+  color: var(--color-charcoal-muted);
+  border-left: 2.5px solid var(--color-gold);
   padding-left: var(--space-3);
   margin-bottom: var(--space-8);
   max-width: 440px;
@@ -426,23 +452,23 @@ button, input, select, textarea {
 }
 
 /* ==================================================
-   TODAY'S SPECIAL SECTION (Dark Premium Section)
+   1. TODAY'S SPECIAL SECTION (Light Warm Linen & White Card)
    ================================================== */
 .special-section {
-  background-color: var(--color-navy-surface);
-  color: var(--color-white);
-  padding: var(--space-16) 0;
-  border-top: 1px solid var(--color-navy-border);
-  border-bottom: 1px solid var(--color-navy-border);
+  background-color: var(--color-canvas-subtle);
+  color: var(--color-charcoal);
+  padding: var(--space-20) 0;
+  border-top: 1px solid var(--color-canvas-border);
+  border-bottom: 1px solid var(--color-canvas-border);
 }
 
 .special-card {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
-  background-color: var(--color-navy-deep);
-  border: 1px solid var(--color-gold-border);
+  background-color: var(--color-canvas-card);
+  border: 1px solid var(--color-canvas-border);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-dark);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
   align-items: stretch;
 }
@@ -455,16 +481,16 @@ button, input, select, textarea {
 }
 
 .special-title {
-  font-size: clamp(28px, 3.5vw, 38px);
-  color: var(--color-ivory);
+  font-size: clamp(28px, 3.5vw, 40px);
+  color: var(--color-charcoal-deep);
   margin-bottom: var(--space-4);
   line-height: 1.2;
 }
 
 .special-desc {
   font-size: 15px;
-  color: var(--color-text-on-dark);
-  line-height: 1.7;
+  color: var(--color-charcoal-muted);
+  line-height: 1.75;
   margin-bottom: var(--space-6);
 }
 
@@ -479,15 +505,15 @@ button, input, select, textarea {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: var(--color-text-muted-dark);
-  font-weight: 600;
+  color: var(--color-charcoal-light);
+  font-weight: 700;
 }
 
 .price-value {
   font-family: "DM Sans", sans-serif;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
-  color: var(--color-gold);
+  color: var(--color-gold-deep);
 }
 
 .special-cta-row {
@@ -498,7 +524,7 @@ button, input, select, textarea {
   position: relative;
   min-height: 320px;
   overflow: hidden;
-  background-color: var(--color-navy);
+  background-color: var(--color-canvas-subtle);
 }
 
 .special-image {
@@ -510,14 +536,14 @@ button, input, select, textarea {
 }
 
 .special-card:hover .special-image {
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 /* ==================================================
-   MENU SECTION (Light Cream Background / White Cards)
+   2. MENU SECTION & CATEGORIES (Crisp Light Luxury)
    ================================================== */
 .menu-section {
-  background-color: var(--color-cream);
+  background-color: var(--color-canvas);
   color: var(--color-charcoal);
   padding: var(--space-20) 0;
 }
@@ -529,8 +555,8 @@ button, input, select, textarea {
 }
 
 .section-title {
-  font-size: clamp(28px, 3.5vw, 40px);
-  color: var(--color-navy);
+  font-size: clamp(28px, 3.5vw, 42px);
+  color: var(--color-charcoal-deep);
   margin-bottom: var(--space-3);
   line-height: 1.2;
 }
@@ -540,7 +566,7 @@ button, input, select, textarea {
   color: var(--color-charcoal-muted);
 }
 
-/* Category Navigation (Clean Pill Buttons) */
+/* Category Navigation (Clean Pill Buttons with Crisp Contrast) */
 .category-nav-wrap {
   margin-bottom: var(--space-10);
 }
@@ -551,14 +577,19 @@ button, input, select, textarea {
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  padding: 4px;
+  padding: 6px;
+  background-color: var(--color-canvas-subtle);
+  border: 1px solid var(--color-canvas-border);
+  border-radius: var(--radius-pill);
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .category-tab {
   height: 40px;
   padding: 0 var(--space-5);
-  background-color: var(--color-cream-card);
-  border: 1px solid var(--color-cream-border);
+  background-color: transparent;
+  border: 1px solid transparent;
   border-radius: var(--radius-pill);
   color: var(--color-charcoal);
   font-family: "DM Sans", sans-serif;
@@ -568,7 +599,6 @@ button, input, select, textarea {
   text-transform: uppercase;
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: var(--shadow-subtle);
   transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
@@ -576,16 +606,18 @@ button, input, select, textarea {
 }
 
 .category-tab:hover {
+  background-color: #ffffff;
   border-color: var(--color-gold);
-  color: var(--color-navy);
-  background-color: var(--color-ivory);
+  color: var(--color-gold-deep);
+  box-shadow: var(--shadow-subtle);
 }
 
 .category-tab.active {
-  background-color: var(--color-navy);
-  color: var(--color-white);
-  border-color: var(--color-navy);
-  box-shadow: 0 4px 12px rgba(7, 23, 38, 0.18);
+  background-color: var(--color-charcoal-deep);
+  color: #ffffff;
+  border-color: var(--color-charcoal-deep);
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(18, 24, 32, 0.18);
 }
 
 /* Menu Toolbar (Title, Dietary Legend, Count) */
@@ -595,7 +627,7 @@ button, input, select, textarea {
   justify-content: space-between;
   margin-bottom: var(--space-6);
   padding-bottom: var(--space-3);
-  border-bottom: 1px solid var(--color-cream-border);
+  border-bottom: 1px solid var(--color-canvas-border);
   flex-wrap: wrap;
   gap: var(--space-3);
 }
@@ -610,15 +642,16 @@ button, input, select, textarea {
 .toolbar-title {
   font-family: "Playfair Display", Georgia, serif;
   font-size: 24px;
-  color: var(--color-navy);
+  color: var(--color-charcoal-deep);
 }
 
 .diet-legend {
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--color-charcoal-muted);
+  font-weight: 500;
 }
 
 .legend-item {
@@ -628,13 +661,13 @@ button, input, select, textarea {
 }
 
 .menu-count {
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--color-charcoal-muted);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* ==================================================
-   MENU ITEM CARDS (Strict Equal-Size System)
+   3. MENU ITEM CARDS (Strict Equal-Size Light Architecture)
    ================================================== */
 .dish-grid {
   display: grid;
@@ -644,20 +677,20 @@ button, input, select, textarea {
 }
 
 .dish-card {
-  background-color: var(--color-cream-card);
-  border: 1px solid var(--color-cream-border);
+  background-color: #ffffff;
+  border: 1px solid var(--color-canvas-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.28s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.28s ease, border-color 0.28s ease;
   user-select: none;
 }
 
 .dish-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   box-shadow: var(--shadow-card-hover);
   border-color: var(--color-gold);
 }
@@ -673,7 +706,7 @@ button, input, select, textarea {
   width: 100%;
   height: 190px;
   overflow: hidden;
-  background-color: var(--color-cream-soft);
+  background-color: var(--color-canvas-subtle);
   flex-shrink: 0;
 }
 
@@ -682,27 +715,28 @@ button, input, select, textarea {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.4s ease;
+  transition: transform 0.45s ease;
 }
 
 .dish-card:hover .dish-image {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
 .dish-badge-popular {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: rgba(4, 14, 24, 0.88);
-  color: var(--color-gold);
-  border: 1px solid var(--color-gold-border);
+  background: rgba(18, 24, 32, 0.88);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-xs);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  padding: 3px 8px;
+  padding: 3px 9px;
   backdrop-filter: blur(4px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 /* Uniform Card Content */
@@ -712,6 +746,7 @@ button, input, select, textarea {
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
+  background-color: #ffffff;
 }
 
 .dish-header-row {
@@ -724,9 +759,9 @@ button, input, select, textarea {
 .dish-category-tag {
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--color-charcoal-muted);
-  font-weight: 600;
+  letter-spacing: 1.2px;
+  color: var(--color-gold-deep);
+  font-weight: 700;
 }
 
 /* Clamped Dish Title */
@@ -734,13 +769,18 @@ button, input, select, textarea {
   font-family: "Playfair Display", Georgia, serif;
   font-size: 18px;
   font-weight: 600;
-  color: var(--color-navy);
+  color: var(--color-charcoal-deep);
   margin-bottom: var(--space-2);
   line-height: 1.3;
   height: 24px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color 0.2s ease;
+}
+
+.dish-card:hover .dish-name {
+  color: var(--color-gold-deep);
 }
 
 /* Clamped Description (Strictly 2 lines) */
@@ -762,13 +802,13 @@ button, input, select, textarea {
   align-items: center;
   justify-content: space-between;
   padding-top: var(--space-3);
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid var(--color-canvas-border-subtle);
   margin-top: auto;
 }
 
 .dish-price {
   font-family: "DM Sans", sans-serif;
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--color-gold-deep);
 }
@@ -776,23 +816,24 @@ button, input, select, textarea {
 .dish-view-hint {
   font-size: 12px;
   font-weight: 600;
-  color: var(--color-charcoal-muted);
+  color: var(--color-charcoal-light);
   letter-spacing: 0.3px;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .dish-card:hover .dish-view-hint {
-  color: var(--color-navy);
+  color: var(--color-charcoal-deep);
+  transform: translateX(2px);
 }
 
 /* ==================================================
-   BOOK A TABLE SECTION (Dark Navy Section)
+   4. BOOK A TABLE SECTION (Light Warm Linen Accent)
    ================================================== */
 .booking-section {
-  background-color: var(--color-navy);
-  color: var(--color-white);
+  background-color: var(--color-canvas-subtle);
+  color: var(--color-charcoal);
   padding: var(--space-20) 0;
-  border-top: 1px solid var(--color-navy-border);
+  border-top: 1px solid var(--color-canvas-border);
 }
 
 .booking-layout {
@@ -803,16 +844,16 @@ button, input, select, textarea {
 }
 
 .section-title-light {
-  font-size: clamp(28px, 3.5vw, 40px);
-  color: var(--color-ivory);
+  font-size: clamp(28px, 3.5vw, 42px);
+  color: var(--color-charcoal-deep);
   margin-bottom: var(--space-4);
   line-height: 1.2;
 }
 
 .booking-desc {
   font-size: 15px;
-  color: var(--color-text-on-dark);
-  line-height: 1.7;
+  color: var(--color-charcoal-muted);
+  line-height: 1.75;
   margin-bottom: var(--space-8);
   max-width: 520px;
 }
@@ -820,10 +861,11 @@ button, input, select, textarea {
 .info-panel {
   display: grid;
   gap: var(--space-6);
-  background-color: var(--color-navy-surface);
-  border: 1px solid var(--color-gold-border);
+  background-color: #ffffff;
+  border: 1px solid var(--color-canvas-border);
   border-radius: var(--radius-md);
   padding: var(--space-8);
+  box-shadow: var(--shadow-card);
 }
 
 .info-item {
@@ -834,34 +876,34 @@ button, input, select, textarea {
 .info-label {
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--color-gold);
+  letter-spacing: 1.6px;
+  color: var(--color-gold-deep);
   font-weight: 700;
   margin-bottom: var(--space-1);
 }
 
 .info-value {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 600;
-  color: var(--color-ivory);
+  color: var(--color-charcoal-deep);
   line-height: 1.3;
 }
 
 .info-subtext {
   font-size: 12px;
-  color: var(--color-text-muted-dark);
+  color: var(--color-charcoal-muted);
   margin-top: 4px;
 }
 
 /* ==================================================
-   ABOUT SECTION (Light Cream Section)
+   5. ABOUT SECTION (Crisp Light Background & Detail Boxes)
    ================================================== */
 .about-section {
-  background-color: var(--color-cream-soft);
+  background-color: var(--color-canvas);
   color: var(--color-charcoal);
   padding: var(--space-20) 0;
-  border-top: 1px solid var(--color-cream-border);
+  border-top: 1px solid var(--color-canvas-border);
 }
 
 .about-grid {
@@ -872,8 +914,8 @@ button, input, select, textarea {
 }
 
 .about-title {
-  font-size: clamp(28px, 3.5vw, 38px);
-  color: var(--color-navy);
+  font-size: clamp(28px, 3.5vw, 40px);
+  color: var(--color-charcoal-deep);
   margin-bottom: var(--space-4);
   line-height: 1.25;
 }
@@ -881,7 +923,7 @@ button, input, select, textarea {
 .about-text {
   font-size: 15px;
   color: var(--color-charcoal-muted);
-  line-height: 1.75;
+  line-height: 1.8;
   margin-bottom: var(--space-4);
 }
 
@@ -889,29 +931,40 @@ button, input, select, textarea {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-3);
-  margin-top: var(--space-6);
+  margin-top: var(--space-8);
   padding-top: var(--space-6);
-  border-top: 1px solid var(--color-cream-border);
+  border-top: 1px solid var(--color-canvas-border);
 }
 
 .about-detail-box {
   display: flex;
   flex-direction: column;
+  background-color: #ffffff;
+  border: 1px solid var(--color-canvas-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  box-shadow: var(--shadow-subtle);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.about-detail-box:hover {
+  border-color: var(--color-gold);
+  transform: translateY(-2px);
 }
 
 .about-detail-label {
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   color: var(--color-gold-deep);
   font-weight: 700;
   margin-bottom: 4px;
 }
 
 .about-detail-value {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
-  color: var(--color-navy);
+  color: var(--color-charcoal-deep);
 }
 
 .about-media {
@@ -919,7 +972,7 @@ button, input, select, textarea {
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-card);
-  border: 1px solid var(--color-cream-border);
+  border: 1px solid var(--color-canvas-border);
   height: 380px;
 }
 
@@ -928,16 +981,21 @@ button, input, select, textarea {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.about-media:hover .about-image {
+  transform: scale(1.03);
 }
 
 /* ==================================================
-   FOOTER (Deep Navy)
+   FOOTER (Refined Grounded Warm Dark)
    ================================================== */
 .site-footer {
-  background-color: var(--color-navy-deep);
-  color: var(--color-text-on-dark);
+  background-color: #121820;
+  color: var(--color-text-muted-dark);
   padding: var(--space-12) 0 var(--space-6);
-  border-top: 1px solid var(--color-navy-border);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer-grid {
@@ -948,10 +1006,16 @@ button, input, select, textarea {
 }
 
 .footer-brand .brand-title {
-  color: var(--color-ivory);
+  color: #ffffff;
 }
 
 .footer-brand .brand-tagline {
+  color: var(--color-gold);
+}
+
+.footer-brand .brand-mark {
+  border-color: var(--color-gold);
+  background: rgba(184, 138, 56, 0.15);
   color: var(--color-gold);
 }
 
@@ -960,12 +1024,13 @@ button, input, select, textarea {
   align-items: center;
   justify-content: center;
   gap: var(--space-6);
-  font-size: 13px;
+  font-size: 13.5px;
   flex-wrap: wrap;
 }
 
 .footer-links a {
   color: var(--color-text-muted-dark);
+  transition: color 0.2s ease;
 }
 
 .footer-links a:hover {
@@ -987,26 +1052,27 @@ button, input, select, textarea {
   border: 1px solid var(--color-gold-border);
   padding: 8px 16px;
   border-radius: var(--radius-sm);
+  background: rgba(184, 138, 56, 0.08);
   transition: all 0.2s ease;
 }
 
 .instagram-link:hover {
-  background-color: var(--color-gold-subtle);
+  background-color: var(--color-gold);
   border-color: var(--color-gold);
-  color: var(--color-gold-hover);
+  color: #ffffff;
 }
 
 .copyright {
   margin-top: var(--space-8);
   padding-top: var(--space-6);
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   text-align: center;
   font-size: 12px;
-  color: var(--color-text-muted-dark);
+  color: #64748b;
 }
 
 /* ==================================================
-   MODAL DIALOGS (Food Details & Table Booking)
+   MODAL DIALOGS (Light Crisp Cards)
    ================================================== */
 .modal {
   position: fixed;
@@ -1025,18 +1091,18 @@ button, input, select, textarea {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(4, 14, 24, 0.78);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background-color: rgba(18, 24, 32, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 1;
 }
 
 .modal-card {
   position: relative;
   z-index: 2;
-  background-color: var(--color-navy-surface);
-  color: var(--color-white);
-  border: 1px solid var(--color-gold-border);
+  background-color: #ffffff;
+  color: var(--color-charcoal);
+  border: 1px solid var(--color-canvas-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-modal);
   width: min(540px, 100%);
@@ -1062,21 +1128,22 @@ button, input, select, textarea {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: rgba(4, 14, 24, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--color-white);
+  background-color: #ffffff;
+  border: 1px solid var(--color-canvas-border);
+  color: var(--color-charcoal);
   font-size: 20px;
   line-height: 1;
   display: grid;
   place-items: center;
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-subtle);
 }
 
 .modal-close:hover {
-  background-color: var(--color-gold);
-  border-color: var(--color-gold);
-  color: var(--color-navy-deep);
+  background-color: var(--color-charcoal-deep);
+  border-color: var(--color-charcoal-deep);
+  color: #ffffff;
 }
 
 /* Food Details Modal Specifics */
@@ -1089,7 +1156,7 @@ button, input, select, textarea {
   position: relative;
   width: 100%;
   height: 240px;
-  background-color: var(--color-navy);
+  background-color: var(--color-canvas-subtle);
 }
 
 .food-modal-img {
@@ -1113,28 +1180,28 @@ button, input, select, textarea {
 .food-modal-type {
   font-size: 12px;
   font-weight: 600;
-  color: var(--color-text-on-dark);
+  color: var(--color-charcoal);
 }
 
 .food-modal-category {
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--color-gold);
+  letter-spacing: 1.2px;
+  color: var(--color-gold-deep);
   margin-left: auto;
   font-weight: 700;
 }
 
 .food-modal-title {
   font-size: 24px;
-  color: var(--color-ivory);
+  color: var(--color-charcoal-deep);
   margin-bottom: var(--space-3);
   line-height: 1.25;
 }
 
 .food-modal-desc {
   font-size: 14px;
-  color: var(--color-text-on-dark);
+  color: var(--color-charcoal-muted);
   line-height: 1.65;
   margin-bottom: var(--space-6);
 }
@@ -1144,7 +1211,7 @@ button, input, select, textarea {
   flex-direction: column;
   gap: var(--space-3);
   padding-top: var(--space-4);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--color-canvas-border-subtle);
 }
 
 .food-modal-price-box {
@@ -1157,19 +1224,20 @@ button, input, select, textarea {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--color-text-muted-dark);
+  color: var(--color-charcoal-light);
+  font-weight: 600;
 }
 
 .food-modal-price {
   font-family: "DM Sans", sans-serif;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
-  color: var(--color-gold);
+  color: var(--color-gold-deep);
 }
 
 .food-modal-note {
   font-size: 11.5px;
-  color: var(--color-text-muted-dark);
+  color: var(--color-charcoal-light);
   font-style: italic;
 }
 
@@ -1181,13 +1249,13 @@ button, input, select, textarea {
 
 .modal-heading {
   font-size: 28px;
-  color: var(--color-ivory);
+  color: var(--color-charcoal-deep);
   margin-bottom: var(--space-2);
 }
 
 .modal-subheading {
   font-size: 13.5px;
-  color: var(--color-text-muted-dark);
+  color: var(--color-charcoal-muted);
   margin-bottom: var(--space-6);
 }
 
@@ -1206,7 +1274,7 @@ button, input, select, textarea {
 .form-group label {
   font-size: 12px;
   font-weight: 600;
-  color: var(--color-text-on-dark);
+  color: var(--color-charcoal);
   letter-spacing: 0.4px;
 }
 
@@ -1216,10 +1284,10 @@ button, input, select, textarea {
   width: 100%;
   height: 44px;
   padding: 0 var(--space-3);
-  background-color: var(--color-navy-card);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: var(--color-canvas);
+  border: 1px solid var(--color-canvas-border);
   border-radius: var(--radius-sm);
-  color: var(--color-white);
+  color: var(--color-charcoal-deep);
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -1235,7 +1303,8 @@ button, input, select, textarea {
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--color-gold);
-  box-shadow: 0 0 0 2px var(--color-gold-subtle);
+  box-shadow: 0 0 0 2px var(--color-gold-glow);
+  background-color: #ffffff;
 }
 
 .form-row {
@@ -1253,9 +1322,10 @@ button, input, select, textarea {
 .form-message {
   margin-top: var(--space-4);
   font-size: 13.5px;
-  color: var(--color-gold);
+  color: var(--color-gold-deep);
   text-align: center;
   line-height: 1.5;
+  font-weight: 600;
 }
 
 /* ==================================================
@@ -1335,9 +1405,9 @@ button, input, select, textarea {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(4, 14, 24, 0.98);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(252, 251, 250, 0.98);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     z-index: 99;
     transform: translateY(-100%);
     opacity: 0;
@@ -1368,9 +1438,9 @@ button, input, select, textarea {
   .mobile-nav-link {
     font-family: "Playfair Display", Georgia, serif;
     font-size: 22px;
-    color: var(--color-ivory);
+    color: var(--color-charcoal-deep);
     padding: var(--space-3) 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--color-canvas-border-subtle);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1378,24 +1448,24 @@ button, input, select, textarea {
 
   .mobile-nav-link:hover,
   .mobile-nav-link:active {
-    color: var(--color-gold);
+    color: var(--color-gold-deep);
   }
 
   .mobile-drawer-footer {
     padding-top: var(--space-6);
-    border-top: 1px solid var(--color-gold-border);
+    border-top: 1px solid var(--color-canvas-border);
   }
 
   .mobile-drawer-info {
     font-size: 14px;
-    color: var(--color-gold);
-    font-weight: 600;
+    color: var(--color-gold-deep);
+    font-weight: 700;
     margin-bottom: 4px;
   }
 
   .mobile-drawer-hours {
     font-size: 13px;
-    color: var(--color-text-muted-dark);
+    color: var(--color-charcoal-muted);
   }
 
   /* Horizontal Scrolling Category Tabs on Mobile */
@@ -1416,6 +1486,7 @@ button, input, select, textarea {
     justify-content: flex-start;
     width: max-content;
     padding-bottom: 6px;
+    margin: 0;
   }
 
   .category-tab {
@@ -1441,7 +1512,7 @@ button, input, select, textarea {
   }
 
   .dish-price {
-    font-size: 16px;
+    font-size: 17px;
   }
 }
 
@@ -1484,7 +1555,7 @@ button, input, select, textarea {
     grid-template-columns: 1fr;
   }
 
-  /* For very narrow mobile, clean 1-column layout for perfect legibility */
+  /* 1-Column Dish Grid on Very Narrow Mobile */
   .dish-grid {
     grid-template-columns: 1fr;
     gap: var(--space-4);

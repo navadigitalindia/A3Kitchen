@@ -106,7 +106,7 @@ const dishes = [
     price: "₹260",
     desc: "Aromatic long-grain basmati rice layered with spiced chicken, caramelized onions, and fresh mint.",
     details: "A3 Kitchen's signature dish: fragrant aged basmati rice cooked on dum in a sealed pot with marinated tender chicken, saffron milk, brown onions, and whole cardamom.",
-    image: "https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80",
     isPopular: true
   },
   {
