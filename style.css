@@ -169,10 +169,12 @@
     transform: translate(0, 0) scale(0.94);
     opacity: 0.70;
   }
+
   50% {
     transform: translate(25px, -18px) scale(1.10);
     opacity: 0.95;
   }
+
   100% {
     transform: translate(-18px, 20px) scale(1.02);
     opacity: 0.80;
@@ -183,7 +185,9 @@
    BASE RESETS & DARK SURFACE DEFAULTS
    ========================================================================== */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -231,13 +235,16 @@ body.modal-open {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #000000;
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-gold-deep);
 }
@@ -253,7 +260,10 @@ a {
   transition: var(--transition-smooth);
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   font-family: inherit;
 }
 
@@ -264,7 +274,7 @@ button, input, select, textarea {
   opacity: 0;
   transform: translateY(60px) scale(0.97);
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -283,6 +293,7 @@ button, input, select, textarea {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -307,7 +318,8 @@ button, input, select, textarea {
   color: var(--color-gold-bright);
 }
 
-.kicker-leaf, .folio-mark {
+.kicker-leaf,
+.folio-mark {
   font-size: 0.95rem;
   color: var(--color-gold);
   line-height: 1;
@@ -316,7 +328,8 @@ button, input, select, textarea {
 /* --------------------------------------------------------------------------
    CURLED PAGE CORNER EFFECT
    -------------------------------------------------------------------------- */
-.plate-corner-curl, .curled-corner {
+.plate-corner-curl,
+.curled-corner {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -327,7 +340,8 @@ button, input, select, textarea {
   transition: var(--transition-smooth);
 }
 
-.plate-corner-curl::after, .curled-corner::after {
+.plate-corner-curl::after,
+.curled-corner::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -747,7 +761,8 @@ a:hover .btn-arrow {
   letter-spacing: -0.04em;
   color: #ffffff;
   transition: var(--transition-smooth);
-  display: none; /* Hidden when logo image is present */
+  display: none;
+  /* Hidden when logo image is present */
 }
 
 .logo-mark.light {
@@ -766,7 +781,8 @@ a:hover .btn-arrow {
   letter-spacing: 0.04em;
   color: #ffffff;
   line-height: 1;
-  display: none; /* Hidden when logo image is present */
+  display: none;
+  /* Hidden when logo image is present */
 }
 
 .logo-name.light {
@@ -858,9 +874,11 @@ a:hover .btn-arrow {
 .mobile-toggle.active .bar:nth-child(1) {
   transform: translateY(6.5px) rotate(45deg);
 }
+
 .mobile-toggle.active .bar:nth-child(2) {
   opacity: 0;
 }
+
 .mobile-toggle.active .bar:nth-child(3) {
   transform: translateY(-6.5px) rotate(-45deg);
 }
@@ -953,12 +971,10 @@ a:hover .btn-arrow {
 .hero-gradient-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    ellipse at center 40%,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.65) 60%,
-    rgba(0, 0, 0, 0.88) 100%
-  );
+  background: radial-gradient(ellipse at center 40%,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.65) 60%,
+      rgba(0, 0, 0, 0.88) 100%);
 }
 
 .hero-content {
@@ -1000,6 +1016,7 @@ a:hover .btn-arrow {
   letter-spacing: -0.03em;
   background: linear-gradient(145deg, #ffffff 15%, #ffe6b0 45%, #ff9e2c 80%, #d46f00 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 4px 30px rgba(255, 130, 20, 0.35));
   margin-bottom: 1.2rem;
@@ -1070,12 +1087,10 @@ a:hover .btn-arrow {
 .special-section {
   position: relative;
   z-index: 2;
-  background: radial-gradient(
-    ellipse at 50% 0%,
-    rgba(255, 120, 20, 0.22) 0%,
-    rgba(12, 12, 14, 0.76) 45%,
-    rgba(4, 4, 5, 0.82) 100%
-  );
+  background: radial-gradient(ellipse at 50% 0%,
+      rgba(255, 120, 20, 0.22) 0%,
+      rgba(12, 12, 14, 0.76) 45%,
+      rgba(4, 4, 5, 0.82) 100%);
   overflow: hidden;
   padding: 5rem 0 7rem;
   border-top: none;
@@ -1164,7 +1179,7 @@ a:hover .btn-arrow {
 .loupe-crosshair {
   position: absolute;
   inset: 0;
-  background: 
+  background:
     linear-gradient(to right, transparent 48%, rgba(212, 168, 83, 0.4) 49%, rgba(212, 168, 83, 0.4) 51%, transparent 52%),
     linear-gradient(to bottom, transparent 48%, rgba(212, 168, 83, 0.4) 49%, rgba(212, 168, 83, 0.4) 51%, transparent 52%);
   pointer-events: none;
@@ -1227,7 +1242,8 @@ a:hover .btn-arrow {
   transition: var(--transition-smooth);
 }
 
-.btn-loupe-action:hover, .btn-loupe-action.active {
+.btn-loupe-action:hover,
+.btn-loupe-action.active {
   background: var(--gold-gradient);
   color: #000000;
   border-color: var(--color-gold);
@@ -1245,7 +1261,8 @@ a:hover .btn-arrow {
   gap: 4px;
 }
 
-.btn-zoom-step, .btn-zoom-reset {
+.btn-zoom-step,
+.btn-zoom-reset {
   background: none;
   border: none;
   color: #ffffff;
@@ -1262,7 +1279,8 @@ a:hover .btn-arrow {
   transition: var(--transition-smooth);
 }
 
-.btn-zoom-step:hover, .btn-zoom-reset:hover {
+.btn-zoom-step:hover,
+.btn-zoom-reset:hover {
   background: rgba(212, 168, 83, 0.25);
   color: var(--color-gold);
 }
@@ -1479,8 +1497,8 @@ a:hover .btn-arrow {
   overflow: hidden;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s ease;
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -1495,11 +1513,9 @@ a:hover .btn-arrow {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(
-    380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 140, 20, 0.22),
-    transparent 65%
-  );
+  background: radial-gradient(380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(255, 140, 20, 0.22),
+      transparent 65%);
   opacity: 0;
   transition: opacity 0.35s ease;
   pointer-events: none;
@@ -1647,12 +1663,10 @@ a:hover .btn-arrow {
 .showcase-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.15) 0%,
-    rgba(0, 0, 0, 0.50) 40%,
-    rgba(0, 0, 0, 0.92) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.50) 40%,
+      rgba(0, 0, 0, 0.92) 100%);
   display: flex;
   align-items: flex-end;
   padding: clamp(3rem, 6vw, 5rem);
@@ -1887,10 +1901,8 @@ a:hover .btn-arrow {
    ========================================================================== */
 
 .about-section {
-  position: relative;
-  z-index: 2;
   padding: 8rem clamp(1.5rem, 5vw, 4.5rem);
-  background: linear-gradient(180deg, rgba(4, 4, 5, 0.85) 0%, rgba(10, 10, 12, 0.78) 100%);
+  background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
 }
 
 .about-container {
@@ -2214,7 +2226,8 @@ a:hover .btn-arrow {
   z-index: 10;
 }
 
-.btn-modal-inspect:hover, .btn-modal-inspect.active {
+.btn-modal-inspect:hover,
+.btn-modal-inspect.active {
   background: var(--gold-gradient);
   color: #000000;
   border-color: transparent;
@@ -2619,7 +2632,10 @@ a:hover .btn-arrow {
    REDUCED MOTION PREFERENCE
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
