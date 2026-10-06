@@ -1,476 +1,1325 @@
-/**
- * A3 Kitchen — Digital Restaurant Menu
- * High-performance, clean UI logic & digital menu catalog
- */
+// ==========================================================================
+// A3 KITCHEN — DIGITAL RESTAURANT MENU & EDITORIAL SKETCHBOOK ENGINE
+// Upgraded with ThreeUI MengToSketchbookLandingPage Interaction System
+// Production Quality, Accessible, Secure, and Performance-Optimized
+// ==========================================================================
 
-// 1. Menu Dataset
-const dishes = [
-  // STARTERS
+// 1. STANDARDIZED MENU ITEMS DATABASE (100% Local Restaurant Photography)
+const menuItems = [
   {
-    id: 1,
+    id: "paneer-tikka",
     name: "Paneer Tikka",
-    category: "Starters",
+    plateNo: "PLATE № 01",
     isVeg: true,
+    cat: "starters",
+    tags: ["starters", "veg"],
+    desc: "Smoky grilled paneer cubes marinated in yogurt and hand-pounded spices.",
     price: "₹180",
-    desc: "Smoky grilled cottage cheese cubes infused with spiced yogurt marinade and roasted herbs.",
-    details: "Tender, fresh cottage cheese cubes marinated in Kashmiri chili, crushed coriander, hung yogurt, and mustard oil, then charred to smoky perfection in our traditional clay tandoor. Served with mint chutney and pickled shallots.",
-    image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=800&q=80",
-    isPopular: true
+    img: "assets/images/paneer-tikka.jpg"
   },
   {
-    id: 2,
+    id: "chicken-65",
     name: "Chicken 65",
-    category: "Starters",
+    plateNo: "PLATE № 02",
     isVeg: false,
-    price: "₹220",
-    desc: "Crispy boneless chicken bites tossed with fresh curry leaves, crushed pepper, and green chillies.",
-    details: "Authentic southern delicacy featuring tender boneless chicken morsels marinated in spiced cornflour batter, deep fried until crisp, and finished in a smoking wok with fresh curry leaves, mustard seeds, and crushed peppercorns.",
-    image: "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=800&q=80",
-    isPopular: true
+    cat: "starters",
+    tags: ["starters", "nonveg", "chinese"],
+    desc: "Crispy chicken chunks tossed with tempered curry leaves and green chilies.",
+    price: "₹200",
+    img: "assets/images/chicken-65.jpg"
   },
   {
-    id: 3,
-    name: "Veg Manchurian Dry",
-    category: "Starters",
-    isVeg: true,
-    price: "₹170",
-    desc: "Crispy vegetable dumplings wok-tossed with ginger, garlic, spring onions, and oriental sauces.",
-    details: "Crisp hand-rolled vegetable dumplings made from finely minced cabbage, carrots, and beans, flash-fried and tossed in a savory dark soy and chili glaze garnished with scallions.",
-    image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80",
-    isPopular: false
-  },
-  {
-    id: 4,
-    name: "Tandoori Chicken",
-    category: "Starters",
-    isVeg: false,
-    price: "₹250",
-    desc: "Classic bone-in chicken slow-roasted in our clay oven with house-blended garam masala and lemon butter.",
-    details: "Whole chicken cuts deeply scored and marinated overnight in strained curd, degi mirch, kasoori methi, and garlic. Roasted over glowing coals until juicy inside with a delectable smoky crust.",
-    image: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=800&q=80",
-    isPopular: false
-  },
-
-  // MAIN COURSE
-  {
-    id: 5,
-    name: "Butter Chicken",
-    category: "Main Course",
-    isVeg: false,
-    price: "₹280",
-    desc: "Tender tandoori chicken simmered in a velvety tomato, butter, and cashew nut cream sauce.",
-    details: "Succulent shredded tandoori chicken simmered in a slow-cooked makhani gravy enriched with ripe farm tomatoes, white butter, fragrant fenugreek leaves, and silky cashew cream.",
-    image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=80",
-    isPopular: true
-  },
-  {
-    id: 6,
-    name: "Paneer Butter Masala",
-    category: "Main Course",
-    isVeg: true,
-    price: "₹240",
-    desc: "Soft paneer cubes bathed in a rich, mildly spiced gravy of tomatoes, butter, and aromatic spices.",
-    details: "Melt-in-mouth cottage cheese simmered in a fragrant tomato-cashew reduction, tempered with cumin and topped with fresh dairy cream and dried fenugreek.",
-    image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=80",
-    isPopular: false
-  },
-  {
-    id: 7,
-    name: "Dal Makhani",
-    category: "Main Course",
-    isVeg: true,
-    price: "₹210",
-    desc: "Slow-cooked black lentils and kidney beans simmered overnight with cream and gentle spices.",
-    details: "Traditional Punjabi black urad lentils slow-cooked over gentle embers for 12 hours with vine-ripened tomatoes, fresh ginger, churned butter, and cream.",
-    image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80",
-    isPopular: true
-  },
-  {
-    id: 8,
-    name: "Mutton Rogan Josh",
-    category: "Main Course",
-    isVeg: false,
-    price: "₹340",
-    desc: "Kashmiri-style tender braised lamb cooked in aromatic gravy flavored with fennel and dry ginger.",
-    details: "Prime tender mutton pieces slow-braised in a vibrant, jewel-toned gravy scented with whole Kashmiri spices, ratan jot, fennel seeds, and shallot broth.",
-    image: "https://images.unsplash.com/photo-1545247181-516773cae754?auto=format&fit=crop&w=800&q=80",
-    isPopular: false
-  },
-
-  // BIRYANI
-  {
-    id: 9,
-    name: "Special Chicken Biryani",
-    category: "Biryani",
-    isVeg: false,
-    price: "₹260",
-    desc: "Aromatic long-grain basmati rice layered with spiced chicken, caramelized onions, and fresh mint.",
-    details: "A3 Kitchen's signature dish: fragrant aged basmati rice cooked on dum in a sealed pot with marinated tender chicken, saffron milk, brown onions, and whole cardamom.",
-    image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80",
-    isPopular: true
-  },
-  {
-    id: 10,
-    name: "Hyderabadi Mutton Biryani",
-    category: "Biryani",
-    isVeg: false,
-    price: "₹320",
-    desc: "Royal dum-cooked biryani featuring juicy cuts of mutton, saffron essence, and royal spices.",
-    details: "Prepared according to traditional royal recipes: tender mutton marinated with yogurt, raw papaya, and roasted spices, layered with fluffy basmati and slow-steamed to perfection.",
-    image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&w=800&q=80",
-    isPopular: true
-  },
-  {
-    id: 11,
-    name: "Subz Dum Biryani",
-    category: "Biryani",
-    isVeg: true,
-    price: "₹220",
-    desc: "Garden fresh seasonal vegetables cooked with long-grain basmati rice, mint, and saffron infusion.",
-    details: "Fluffy basmati rice layered with spiced florets of cauliflower, green peas, carrots, french beans, and paneer, sealed with dough and steamed on gentle dum heat.",
-    image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=800&q=80",
-    isPopular: false
-  },
-
-  // CHINESE
-  {
-    id: 12,
-    name: "Chilli Chicken",
-    category: "Chinese",
-    isVeg: false,
-    price: "₹230",
-    desc: "Crisp chicken pieces wok-tossed with crunchy bell peppers, green chillies, and savory soy glaze.",
-    details: "Classic Indo-Chinese preparation of wok-seared marinated chicken cubes tossed with diced sweet onions, bell peppers, fresh garlic, and spicy umami soy seasoning.",
-    image: "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=800&q=80",
-    isPopular: false
-  },
-  {
-    id: 13,
-    name: "Veg Hakka Noodles",
-    category: "Chinese",
-    isVeg: true,
-    price: "₹170",
-    desc: "Classic thin wheat noodles tossed on high heat with crisp julienned vegetables and light seasoning.",
-    details: "Hand-tossed eggless noodles stir-fried in a smoking wok with finely sliced cabbage, bell peppers, spring greens, and a touch of white pepper and light soy.",
-    image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=800&q=80",
-    isPopular: false
-  },
-  {
-    id: 14,
+    id: "veg-fried-rice",
     name: "Veg Fried Rice",
-    category: "Chinese",
+    plateNo: "PLATE № 03",
     isVeg: true,
+    cat: "chinese",
+    tags: ["main", "chinese", "veg"],
+    desc: "A wok-tossed blend of crunchy garden vegetables and fragrant rice.",
     price: "₹160",
-    desc: "Fragrant rice tossed in a smoking wok with crisp vegetables, aromatic garlic, and sesame oil.",
-    details: "Steamed grain-separated rice stir-fried over roaring flame with diced carrots, beans, baby corn, spring onions, and light seasoning with fragrant sesame oil.",
-    image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80",
-    isPopular: false
-  },
-
-  // BEVERAGES
-  {
-    id: 15,
-    name: "Fresh Lime Soda",
-    category: "Beverages",
-    isVeg: true,
-    price: "₹80",
-    desc: "Chilled sparkling soda infused with freshly squeezed lime juice, mint, and crushed rock salt.",
-    details: "Handcrafted refreshing cooler prepared with sparkling club soda, freshly pressed lime, a dash of roasted cumin, rock salt, and cane syrup.",
-    image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80",
-    isPopular: false
+    img: "assets/images/veg-fried-rice.jpg"
   },
   {
-    id: 16,
-    name: "Mango Lassi",
-    category: "Beverages",
-    isVeg: true,
-    price: "₹110",
-    desc: "Thick creamy yogurt smoothie blended with ripe Alphonso mango pulp and fragrant green cardamom.",
-    details: "Rich, chilled yogurt smoothie blended silky smooth with pure seasonal mango puree, crushed cardamom seeds, and garnished with slivered almonds.",
-    image: "https://images.unsplash.com/photo-1570701564993-e00652af8aa7?auto=format&fit=crop&w=800&q=80",
-    isPopular: true
+    id: "mutton-biryani",
+    name: "Mutton Biryani",
+    plateNo: "PLATE № 04",
+    isVeg: false,
+    cat: "biryani",
+    tags: ["biryani", "main", "nonveg"],
+    desc: "Aromatic basmati rice layered with tender mutton and traditional spices.",
+    price: "₹280",
+    img: "assets/images/mutton-biryani-special.jpg"
   },
   {
-    id: 17,
-    name: "Masala Chai",
-    category: "Beverages",
-    isVeg: true,
-    price: "₹60",
-    desc: "Brewed Assam tea steeped with fresh ginger, crushed green cardamom, cinnamon, and whole milk.",
-    details: "Authentic slow-simmered Indian milk tea infused with hand-crushed whole spices: fresh ginger root, green cardamom pods, cinnamon bark, and cloves.",
-    image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=80",
-    isPopular: false
+    id: "chefs-biryani",
+    name: "A3 Special Biryani",
+    plateNo: "PLATE № 05",
+    isVeg: false,
+    cat: "biryani",
+    tags: ["biryani", "main", "nonveg"],
+    desc: "A royal blend of saffron rice, prime meat cuts, and roasted whole spices.",
+    price: "₹320",
+    img: "assets/images/chefs-special-biryani.jpg"
   },
-
-  // DESSERTS
   {
-    id: 18,
+    id: "butter-chicken",
+    name: "Butter Chicken",
+    plateNo: "PLATE № 06",
+    isVeg: false,
+    cat: "main",
+    tags: ["main", "nonveg"],
+    desc: "Tender tandoori chicken simmered in a velvet tomato, cream and butter gravy.",
+    price: "₹260",
+    img: "assets/images/butter-chicken.jpg"
+  },
+  {
+    id: "mutton-rogan-josh",
+    name: "Mutton Rogan Josh",
+    plateNo: "PLATE № 07",
+    isVeg: false,
+    cat: "main",
+    tags: ["main", "nonveg"],
+    desc: "Classic slow-cooked mutton curry infused with authentic aromatic spices.",
+    price: "₹300",
+    img: "assets/images/mutton-rogan-josh.jpg"
+  },
+  {
+    id: "gulab-jamun",
     name: "Gulab Jamun",
-    category: "Desserts",
+    plateNo: "PLATE № 08",
     isVeg: true,
+    cat: "desserts",
+    tags: ["desserts", "veg"],
+    desc: "Soft milk dumplings soaked in warm rose and green cardamom syrup.",
     price: "₹90",
-    desc: "Warm melt-in-mouth milk dumplings soaked in rose water and green cardamom scented sugar syrup.",
-    details: "Golden-brown dumplings made from reduced mawa milk solids, gently fried and soaked in warm, fragrant rose water and cardamom sugar syrup. Served two pieces per portion.",
-    image: "https://images.unsplash.com/photo-1666190094762-72b6c4d8f2ad?auto=format&fit=crop&w=800&q=80",
-    isPopular: true
+    img: "assets/images/gulab-jamun.jpg"
   },
   {
-    id: 19,
-    name: "Royal Rasmalai",
-    category: "Desserts",
+    id: "mango-lassi",
+    name: "Mango Lassi",
+    plateNo: "PLATE № 09",
     isVeg: true,
-    price: "₹120",
-    desc: "Delicate cottage cheese patties poached in sweetened, saffron and pistachio infused condensed milk.",
-    details: "Soft, spongy chhena patties poached in light sugar broth and immersed in chilled, thickened saffron rabdi flavored with cardamom, rose water, and slivered pistachios.",
-    image: "https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=800&q=80",
-    isPopular: false
-  },
-  {
-    id: 20,
-    name: "Kesar Pista Kulfi",
-    category: "Desserts",
-    isVeg: true,
+    cat: "beverages",
+    tags: ["beverages", "veg"],
+    desc: "Chilled sweet mango pulp blended with rich artisan fresh curd.",
     price: "₹110",
-    desc: "Traditional dense Indian ice cream enriched with pure Kashmiri saffron threads and chopped pistachios.",
-    details: "Authentic slow-reduced whole milk frozen in conical moulds, enriched with golden saffron threads, toasted pistachio nuts, and cardamom.",
-    image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80",
-    isPopular: false
+    img: "assets/images/mango-lassi.jpg"
+  },
+  {
+    id: "masala-chai",
+    name: "Masala Chai",
+    plateNo: "PLATE № 10",
+    isVeg: true,
+    cat: "beverages",
+    tags: ["beverages", "veg"],
+    desc: "Fresh tea leaves brewed with crushed ginger, green cardamom, and cloves.",
+    price: "₹60",
+    img: "assets/images/dum-cooking.jpg"
   }
 ];
 
-// 2. DOM Elements
-const dishGrid = document.getElementById("dishGrid");
-const menuCount = document.getElementById("menuCount");
-const activeCategoryHeading = document.getElementById("activeCategoryHeading");
-const categoryTabs = document.querySelectorAll(".category-tab");
+// State & Element Cache
+let currentCategory = "all";
+let modalTriggerElement = null;
 
-// Food Details Modal Elements
-const foodModal = document.getElementById("foodModal");
-const closeFoodModal = document.getElementById("closeFoodModal");
-const closeFoodBackdrop = document.getElementById("closeFoodBackdrop");
-const modalFoodImg = document.getElementById("modalFoodImg");
-const modalFoodDiet = document.getElementById("modalFoodDiet");
-const modalFoodDietLabel = document.getElementById("modalFoodDietLabel");
-const modalFoodCategory = document.getElementById("modalFoodCategory");
-const modalDishTitle = document.getElementById("modalDishTitle");
-const modalDishDesc = document.getElementById("modalDishDesc");
-const modalDishPrice = document.getElementById("modalDishPrice");
+const gridElement = document.getElementById("grid");
+const categoriesContainer = document.getElementById("cats");
 
-// Table Booking Modal Elements
-const bookingModal = document.getElementById("bookingModal");
-const openBooking = document.getElementById("openBooking");
-const closeBooking = document.getElementById("closeBooking");
-const closeBookingBackdrop = document.getElementById("closeBookingBackdrop");
-const bookingForm = document.getElementById("bookingForm");
-const formMessage = document.getElementById("formMessage");
+const modalElement = document.getElementById("modal");
+const modalCloseBtn = document.getElementById("close");
+const modalCloseActionBtn = document.getElementById("modalCloseActionBtn");
 
-// Mobile Drawer Elements
-const menuToggle = document.getElementById("menuToggle");
-const mobileDrawer = document.getElementById("mobileDrawer");
-const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+const galleryModalElement = document.getElementById("galleryModal");
+const galleryCloseBtn = document.getElementById("galleryClose");
+const openGalleryBtn = document.getElementById("openGallery");
 
-// 3. Render Food Cards in Menu Grid
-function renderDishes(filter = "All") {
-  let filtered = [];
+const bookingSuccessModal = document.getElementById("bookingSuccessModal");
+const btnDoneBooking = document.getElementById("btnDoneBooking");
 
-  if (filter === "All") {
-    filtered = dishes;
-    activeCategoryHeading.textContent = "All Dishes";
-  } else if (filter === "Veg") {
-    filtered = dishes.filter(d => d.isVeg === true);
-    activeCategoryHeading.textContent = "Vegetarian Selections";
-  } else if (filter === "Non-Veg") {
-    filtered = dishes.filter(d => d.isVeg === false);
-    activeCategoryHeading.textContent = "Non-Vegetarian Specialties";
-  } else {
-    filtered = dishes.filter(d => d.category.toLowerCase() === filter.toLowerCase());
-    activeCategoryHeading.textContent = filter;
-  }
+const hambBtn = document.getElementById("hamb");
+const drawerElement = document.getElementById("drawer");
 
-  // Update Item Count
-  menuCount.textContent = `Showing ${filtered.length} ${filtered.length === 1 ? "dish" : "dishes"}`;
+// ==========================================================================
+// PART 1 — CINEMATIC WELCOME SEQUENCE (2.5 - 3.5 Seconds)
+// Refined Luxury Hospitality Reveal with Skip & Keyboard Controls
+// ==========================================================================
 
-  // Render Grid
-  dishGrid.innerHTML = filtered.map(dish => `
-    <article class="dish-card" data-dish-id="${dish.id}" tabindex="0" role="button" aria-label="View details for ${dish.name}">
-      <div class="dish-image-wrap">
-        <img class="dish-image" src="${dish.image}" alt="${dish.name}" loading="lazy" />
-        ${dish.isPopular ? '<span class="dish-badge-popular">Chef\'s Pick</span>' : ''}
-      </div>
-      <div class="dish-body">
-        <div class="dish-header-row">
-          <span class="diet-indicator ${dish.isVeg ? 'veg' : 'non-veg'}" title="${dish.isVeg ? 'Vegetarian' : 'Non-Vegetarian'}"></span>
-          <span class="dish-category-tag">${dish.category}</span>
-        </div>
-        <h4 class="dish-name">${dish.name}</h4>
-        <p class="dish-desc">${dish.desc}</p>
-        <div class="dish-footer">
-          <span class="dish-price">${dish.price}</span>
-          <span class="dish-view-hint">Details</span>
-        </div>
-      </div>
-    </article>
-  `).join("");
+function initCinematicWelcome() {
+  const welcomeOverlay = document.getElementById("cinematicWelcome");
+  const stage1 = document.getElementById("stage1");
+  const stage2 = document.getElementById("stage2");
+  const stage3 = document.getElementById("stage3");
+  const skipBtn = document.getElementById("skipWelcomeBtn");
+  const exploreBtn = document.getElementById("welcomeExploreBtn");
 
-  // Attach click & enter listeners to new cards
-  document.querySelectorAll(".dish-card").forEach(card => {
-    const dishId = parseInt(card.dataset.dishId, 10);
-    const dish = dishes.find(d => d.id === dishId);
+  if (!welcomeOverlay) return;
 
-    if (dish) {
-      card.addEventListener("click", () => openFoodDetail(dish));
-      card.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          openFoodDetail(dish);
-        }
-      });
-    }
-  });
-}
-
-// 4. Food Detail Modal Controller
-function openFoodDetail(dish) {
-  modalFoodImg.src = dish.image;
-  modalFoodImg.alt = dish.name;
-  modalFoodDiet.className = `diet-indicator ${dish.isVeg ? 'veg' : 'non-veg'}`;
-  modalFoodDietLabel.textContent = dish.isVeg ? "Vegetarian" : "Non-Vegetarian";
-  modalFoodCategory.textContent = dish.category;
-  modalDishTitle.textContent = dish.name;
-  modalDishDesc.textContent = dish.details;
-  modalDishPrice.textContent = dish.price;
-
-  foodModal.classList.add("open");
-  foodModal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-}
-
-function closeFoodDetail() {
-  foodModal.classList.remove("open");
-  foodModal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
-}
-
-closeFoodModal.addEventListener("click", closeFoodDetail);
-closeFoodBackdrop.addEventListener("click", closeFoodDetail);
-
-// 5. Category Tab Switching
-categoryTabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    categoryTabs.forEach(t => {
-      t.classList.remove("active");
-      t.setAttribute("aria-selected", "false");
-    });
-
-    tab.classList.add("active");
-    tab.setAttribute("aria-selected", "true");
-
-    const category = tab.dataset.category;
-    renderDishes(category);
-  });
-});
-
-// 6. Booking Modal Controller
-function setBookingModal(isOpen) {
-  bookingModal.classList.toggle("open", isOpen);
-  bookingModal.setAttribute("aria-hidden", String(!isOpen));
-  document.body.style.overflow = isOpen ? "hidden" : "";
-
-  if (isOpen) {
-    formMessage.textContent = "";
-    const nameInput = document.getElementById("bookName");
-    if (nameInput) setTimeout(() => nameInput.focus(), 100);
-  }
-}
-
-openBooking.addEventListener("click", () => setBookingModal(true));
-closeBooking.addEventListener("click", () => setBookingModal(false));
-closeBookingBackdrop.addEventListener("click", () => setBookingModal(false));
-
-// Booking Form Submission (Demo mode with real client confirmation feedback)
-bookingForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const name = document.getElementById("bookName").value.trim();
-  const guests = document.getElementById("bookGuests").value;
-  const date = document.getElementById("bookDate").value;
-  const time = document.getElementById("bookTime").value;
-
-  if (!name) {
-    formMessage.textContent = "Please enter your name.";
+  // Respect prefers-reduced-motion
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    welcomeOverlay.style.display = "none";
     return;
   }
 
-  // Format date nicely if available
-  let formattedDate = date;
-  if (date) {
-    const parts = date.split("-");
-    if (parts.length === 3) formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
+  let isDismissed = false;
+
+  function dismissWelcome(targetHash) {
+    if (isDismissed) return;
+    isDismissed = true;
+    welcomeOverlay.classList.add("fade-out");
+
+    setTimeout(() => {
+      welcomeOverlay.style.display = "none";
+      if (targetHash) {
+        const targetEl = document.querySelector(targetHash);
+        if (targetEl) targetEl.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 700);
   }
 
-  formMessage.innerHTML = `Thank you, <strong>${name}</strong>! Your reservation request for <strong>${guests}</strong> on <strong>${formattedDate || "selected date"}</strong> at <strong>${time || "selected time"}</strong> has been received.<br><small style="color:var(--color-text-muted-dark); display:block; margin-top:6px;">This is a demonstration menu; our restaurant team would confirm your table via WhatsApp or SMS in live deployment.</small>`;
-
-  bookingForm.reset();
-});
-
-// 7. Global Keyboard (Escape closes any open modal)
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    if (foodModal.classList.contains("open")) closeFoodDetail();
-    if (bookingModal.classList.contains("open")) setBookingModal(false);
-    if (mobileDrawer.classList.contains("open")) toggleMobileDrawer(false);
+  if (skipBtn) {
+    skipBtn.addEventListener("click", () => dismissWelcome(null));
   }
-});
 
-// 8. Mobile Navigation Drawer Controller
-function toggleMobileDrawer(forceState) {
-  const willOpen = typeof forceState === "boolean" ? forceState : !mobileDrawer.classList.contains("open");
-  mobileDrawer.classList.toggle("open", willOpen);
-  menuToggle.setAttribute("aria-expanded", String(willOpen));
-  mobileDrawer.setAttribute("aria-hidden", String(!willOpen));
-  document.body.style.overflow = willOpen ? "hidden" : "";
+  if (exploreBtn) {
+    exploreBtn.addEventListener("click", () => dismissWelcome("#menu"));
+  }
+
+  welcomeOverlay.classList.add("zooming");
+
+  // Stage 1: Brand reveal (0ms - 900ms)
+  if (stage1) stage1.classList.add("active");
+
+  // Stage 2: Atmosphere & Heritage (900ms - 1900ms)
+  const timerStage2 = setTimeout(() => {
+    if (isDismissed) return;
+    if (stage1) stage1.classList.remove("active");
+    if (stage2) stage2.classList.add("active");
+  }, 900);
+
+  // Stage 3 & 4: Welcome & Restaurant Entrance (1900ms - 3200ms)
+  const timerStage3 = setTimeout(() => {
+    if (isDismissed) return;
+    if (stage2) stage2.classList.remove("active");
+    if (stage3) stage3.classList.add("active");
+  }, 1900);
+
+  // Auto transition to main website at ~3.2s
+  const timerAutoDismiss = setTimeout(() => {
+    if (!isDismissed) {
+      dismissWelcome(null);
+    }
+  }, 3200);
+
+  // Quick escape dismissal
+  window.addEventListener("keydown", function onWelcomeKey(e) {
+    if (e.key === "Escape" && !isDismissed) {
+      clearTimeout(timerStage2);
+      clearTimeout(timerStage3);
+      clearTimeout(timerAutoDismiss);
+      dismissWelcome(null);
+      window.removeEventListener("keydown", onWelcomeKey);
+    }
+  });
 }
 
-menuToggle.addEventListener("click", () => toggleMobileDrawer());
+// ==========================================================================
+// PART 2 — MENU RENDERER & ACCESSIBLE FOOD CARDS (TACTILE SKETCHBOOK)
+// ==========================================================================
 
-mobileNavLinks.forEach(link => {
-  link.addEventListener("click", () => {
-    toggleMobileDrawer(false);
+function filterMenuItems() {
+  if (currentCategory === "all") return menuItems;
+  if (currentCategory === "veg") return menuItems.filter(item => item.isVeg);
+  if (currentCategory === "nonveg") return menuItems.filter(item => !item.isVeg);
+  return menuItems.filter(item => item.tags.includes(currentCategory) || item.cat === currentCategory);
+}
+
+function renderMenu() {
+  if (!gridElement) return;
+  const filtered = filterMenuItems();
+
+  if (filtered.length === 0) {
+    gridElement.textContent = "";
+    const emptyMsg = document.createElement("div");
+    emptyMsg.style.gridColumn = "1/-1";
+    emptyMsg.style.textAlign = "center";
+    emptyMsg.style.padding = "40px";
+    emptyMsg.style.color = "var(--color-ink-muted)";
+    emptyMsg.textContent = "No plates available in this category index.";
+    gridElement.appendChild(emptyMsg);
+    return;
+  }
+
+  gridElement.textContent = "";
+
+  filtered.forEach(item => {
+    const card = document.createElement("article");
+    card.className = "dish-card";
+    card.dataset.id = item.id;
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-label", `${item.name}, ${item.plateNo}, ${item.price}, ${item.isVeg ? 'Vegetarian' : 'Non-Vegetarian'}`);
+
+    // Thumbnail Wrap with Plate Tag
+    const thumbWrap = document.createElement("div");
+    thumbWrap.className = "dish-card-thumb";
+
+    const plateTag = document.createElement("span");
+    plateTag.className = "dish-card-plate-tag";
+    plateTag.textContent = item.plateNo;
+    thumbWrap.appendChild(plateTag);
+
+    const img = document.createElement("img");
+    img.src = item.img;
+    img.alt = item.name;
+    img.loading = "lazy";
+    img.width = 400;
+    img.height = 300;
+    thumbWrap.appendChild(img);
+
+    // Body
+    const body = document.createElement("div");
+    body.className = "dish-card-body";
+
+    // Title & Dietary Row
+    const titleRow = document.createElement("div");
+    titleRow.className = "dish-title-row";
+
+    const title = document.createElement("h3");
+    title.className = "dish-name";
+    title.textContent = item.name;
+
+    const diet = document.createElement("div");
+    diet.className = `diet-indicator ${item.isVeg ? "veg" : "nonveg"}`;
+    diet.title = item.isVeg ? "Vegetarian" : "Non-Vegetarian";
+    const dietBox = document.createElement("span");
+    dietBox.className = "diet-box";
+    const dietDot = document.createElement("span");
+    dietDot.className = "diet-dot";
+    dietBox.appendChild(dietDot);
+    diet.appendChild(dietBox);
+
+    titleRow.appendChild(title);
+    titleRow.appendChild(diet);
+
+    // Description
+    const desc = document.createElement("p");
+    desc.className = "dish-desc";
+    desc.textContent = item.desc;
+
+    // Footer with Price & Inspect CTA
+    const footer = document.createElement("div");
+    footer.className = "dish-card-footer";
+
+    const price = document.createElement("div");
+    price.className = "dish-price";
+    price.textContent = item.price;
+
+    const viewBtn = document.createElement("span");
+    viewBtn.className = "dish-view-btn";
+    viewBtn.textContent = "View Plate →";
+
+    footer.appendChild(price);
+    footer.appendChild(viewBtn);
+
+    body.appendChild(titleRow);
+    body.appendChild(desc);
+    body.appendChild(footer);
+
+    // Curled Page Corner (Tactile Sketchbook Detail)
+    const curlCorner = document.createElement("div");
+    curlCorner.className = "curled-corner";
+    curlCorner.setAttribute("aria-hidden", "true");
+
+    card.appendChild(thumbWrap);
+    card.appendChild(body);
+    card.appendChild(curlCorner);
+
+    gridElement.appendChild(card);
   });
-});
 
-// Close mobile drawer on desktop resize
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 820 && mobileDrawer.classList.contains("open")) {
-    toggleMobileDrawer(false);
+  if (typeof attachCard3DSpotlights === "function") {
+    attachCard3DSpotlights();
+  }
+}
+
+
+
+// Category Tabs Interaction (Editorial Index Navigation)
+if (categoriesContainer) {
+  categoriesContainer.addEventListener("click", e => {
+    const btn = e.target.closest(".cat-pill");
+    if (!btn) return;
+    document.querySelectorAll(".cat-pill").forEach(b => {
+      b.classList.remove("active");
+      b.setAttribute("aria-selected", "false");
+    });
+    btn.classList.add("active");
+    btn.setAttribute("aria-selected", "true");
+    currentCategory = btn.dataset.cat;
+    renderMenu();
+  });
+}
+
+// ==========================================================================
+// PART 3 — ACCESSIBLE FOOD DETAIL MODAL / BOTTOM SHEET (TACTILE SHEET)
+// Focus Management, Scroll Locking, Keyboard Controls
+// ==========================================================================
+
+function openDishModal(item, triggerEl) {
+  if (!item || !modalElement) return;
+
+  modalTriggerElement = triggerEl || document.activeElement;
+
+  const modalImg = document.getElementById("mi");
+  modalImg.src = item.img;
+  modalImg.alt = item.name;
+
+  const plateKicker = document.getElementById("mPlateKicker");
+  if (plateKicker) {
+    plateKicker.textContent = `${item.plateNo} · ARCHIVAL FOLIO`;
+  }
+
+  document.getElementById("mt").textContent = item.name;
+  document.getElementById("md").textContent = item.desc;
+  document.getElementById("mp").textContent = item.price;
+
+  const dietLabel = document.getElementById("mc");
+  dietLabel.textContent = item.isVeg ? "Vegetarian" : "Non-Vegetarian";
+
+  const dietIndicator = document.getElementById("mdietInd");
+  dietIndicator.className = `diet-indicator ${item.isVeg ? "veg" : "nonveg"}`;
+
+  // Reset modal loupe if active
+  const modalLoupe = document.getElementById("modalLoupe");
+  const modalInspectToggle = document.getElementById("modalInspectToggle");
+  if (modalLoupe) modalLoupe.classList.remove("active");
+  if (modalInspectToggle) modalInspectToggle.classList.remove("active");
+
+  document.body.classList.add("modal-open");
+  modalElement.classList.add("open");
+  modalElement.setAttribute("aria-hidden", "false");
+
+  if (modalCloseBtn) {
+    modalCloseBtn.focus();
+  }
+}
+
+function closeDishModal() {
+  if (!modalElement) return;
+  modalElement.classList.remove("open");
+  modalElement.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+
+  if (modalTriggerElement && typeof modalTriggerElement.focus === "function") {
+    modalTriggerElement.focus();
+  }
+}
+
+// Card Click and Keyboard Open Listeners
+function handleCardActivation(card) {
+  if (!card) return;
+  const item = menuItems.find(x => x.id === card.dataset.id);
+  if (item) openDishModal(item, card);
+}
+
+if (gridElement) {
+  gridElement.addEventListener("click", e => {
+    const card = e.target.closest(".dish-card");
+    handleCardActivation(card);
+  });
+  gridElement.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") {
+      const card = e.target.closest(".dish-card");
+      if (card) {
+        e.preventDefault();
+        handleCardActivation(card);
+      }
+    }
+  });
+}
+
+if (modalCloseBtn) modalCloseBtn.addEventListener("click", closeDishModal);
+if (modalCloseActionBtn) modalCloseActionBtn.addEventListener("click", closeDishModal);
+
+if (modalElement) {
+  modalElement.addEventListener("click", e => {
+    if (e.target === modalElement) closeDishModal();
+  });
+}
+
+// ==========================================================================
+// PART 4 — INTERIOR GALLERY LIGHTBOX
+// ==========================================================================
+
+function openGallery() {
+  if (!galleryModalElement) return;
+  modalTriggerElement = openGalleryBtn || document.activeElement;
+  document.body.classList.add("modal-open");
+  galleryModalElement.classList.add("open");
+  galleryModalElement.setAttribute("aria-hidden", "false");
+  if (galleryCloseBtn) galleryCloseBtn.focus();
+}
+
+function closeGallery() {
+  if (!galleryModalElement) return;
+  galleryModalElement.classList.remove("open");
+  galleryModalElement.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+  if (modalTriggerElement && typeof modalTriggerElement.focus === "function") {
+    modalTriggerElement.focus();
+  }
+}
+
+if (openGalleryBtn) openGalleryBtn.addEventListener("click", openGallery);
+if (galleryCloseBtn) galleryCloseBtn.addEventListener("click", closeGallery);
+if (galleryModalElement) {
+  galleryModalElement.addEventListener("click", e => {
+    if (e.target === galleryModalElement) closeGallery();
+  });
+}
+
+// ==========================================================================
+// PART 5 — TACTILE DRAGGABLE MAGNIFYING GLASS LOUPE CONTROLLER
+// High precision optical lens, touch-safe, zero scroll disruption
+// ==========================================================================
+
+let specialZoomLevel = 2.5;
+let isSpecialLoupeActive = false;
+
+function initTactileLoupe() {
+  const container = document.getElementById("specialPlateContainer");
+  const loupe = document.getElementById("specialLoupe");
+  const img = document.getElementById("specialPlateImg");
+  const inspectBtn = document.getElementById("inspectSpecialBtn");
+  const inspectBtnText = document.getElementById("inspectBtnText");
+  const zoomInBtn = document.getElementById("zoomInBtn");
+  const zoomOutBtn = document.getElementById("zoomOutBtn");
+  const zoomResetBtn = document.getElementById("zoomResetBtn");
+  const zoomIndicator = document.getElementById("zoomLevelIndicator");
+  const loupeTag = document.getElementById("specialLoupeTag");
+
+  if (!container || !loupe || !img) return;
+
+  function updateLoupeBackground(x, y) {
+    const rect = container.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+
+    const clampedX = Math.max(0, Math.min(x, rect.width));
+    const clampedY = Math.max(0, Math.min(y, rect.height));
+
+    loupe.style.left = `${clampedX}px`;
+    loupe.style.top = `${clampedY}px`;
+
+    const percX = (clampedX / rect.width) * 100;
+    const percY = (clampedY / rect.height) * 100;
+
+    loupe.style.backgroundImage = `url('${img.currentSrc || img.src}')`;
+    loupe.style.backgroundSize = `${rect.width * specialZoomLevel}px ${rect.height * specialZoomLevel}px`;
+    loupe.style.backgroundPosition = `${percX}% ${percY}%`;
+  }
+
+  function setZoom(newZoom) {
+    specialZoomLevel = Math.max(1.5, Math.min(newZoom, 4.0));
+    if (zoomIndicator) zoomIndicator.textContent = `${specialZoomLevel.toFixed(1)}×`;
+    if (loupeTag) loupeTag.textContent = `${specialZoomLevel.toFixed(1)}× TACTILE ZOOM`;
+    const rect = container.getBoundingClientRect();
+    const currX = parseFloat(loupe.style.left) || rect.width / 2;
+    const currY = parseFloat(loupe.style.top) || rect.height / 2;
+    updateLoupeBackground(currX, currY);
+  }
+
+  if (zoomInBtn) {
+    zoomInBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      setZoom(specialZoomLevel + 0.5);
+    });
+  }
+
+  if (zoomOutBtn) {
+    zoomOutBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      setZoom(specialZoomLevel - 0.5);
+    });
+  }
+
+  if (zoomResetBtn) {
+    zoomResetBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      setZoom(2.5);
+    });
+  }
+
+  if (inspectBtn) {
+    inspectBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      isSpecialLoupeActive = !isSpecialLoupeActive;
+      loupe.classList.toggle("active", isSpecialLoupeActive);
+      inspectBtn.classList.toggle("active", isSpecialLoupeActive);
+      if (inspectBtnText) {
+        inspectBtnText.textContent = isSpecialLoupeActive ? "Hide Loupe" : "Inspect Spices";
+      }
+      if (isSpecialLoupeActive) {
+        const rect = container.getBoundingClientRect();
+        updateLoupeBackground(rect.width / 2, rect.height / 2);
+      }
+    });
+  }
+
+  // Pointer move / dragging support
+  container.addEventListener("pointermove", e => {
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    if (!isSpecialLoupeActive) {
+      isSpecialLoupeActive = true;
+      loupe.classList.add("active");
+      if (inspectBtn) inspectBtn.classList.add("active");
+      if (inspectBtnText) inspectBtnText.textContent = "Hide Loupe";
+    }
+    updateLoupeBackground(x, y);
+  });
+
+  container.addEventListener("pointerleave", () => {
+    // Only auto hide on desktop hover leave
+    if (!window.matchMedia("(pointer: coarse)").matches) {
+      loupe.classList.remove("active");
+      isSpecialLoupeActive = false;
+      if (inspectBtn) inspectBtn.classList.remove("active");
+      if (inspectBtnText) inspectBtnText.textContent = "Inspect Spices";
+    }
+  });
+
+  // Modal Dish Magnification Loupe
+  const modalImgWrap = document.getElementById("modalImgWrap");
+  const modalLoupe = document.getElementById("modalLoupe");
+  const modalImg = document.getElementById("mi");
+  const modalInspectToggle = document.getElementById("modalInspectToggle");
+  let isModalLoupeActive = false;
+
+  if (modalImgWrap && modalLoupe && modalImg) {
+    function updateModalLoupe(x, y) {
+      const rect = modalImgWrap.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+      const clampedX = Math.max(0, Math.min(x, rect.width));
+      const clampedY = Math.max(0, Math.min(y, rect.height));
+
+      modalLoupe.style.left = `${clampedX}px`;
+      modalLoupe.style.top = `${clampedY}px`;
+
+      const percX = (clampedX / rect.width) * 100;
+      const percY = (clampedY / rect.height) * 100;
+
+      modalLoupe.style.backgroundImage = `url('${modalImg.src}')`;
+      modalLoupe.style.backgroundSize = `${rect.width * 2.5}px ${rect.height * 2.5}px`;
+      modalLoupe.style.backgroundPosition = `${percX}% ${percY}%`;
+    }
+
+    if (modalInspectToggle) {
+      modalInspectToggle.addEventListener("click", e => {
+        e.stopPropagation();
+        isModalLoupeActive = !isModalLoupeActive;
+        modalLoupe.classList.toggle("active", isModalLoupeActive);
+        modalInspectToggle.classList.toggle("active", isModalLoupeActive);
+        if (isModalLoupeActive) {
+          const rect = modalImgWrap.getBoundingClientRect();
+          updateModalLoupe(rect.width / 2, rect.height / 2);
+        }
+      });
+    }
+
+    modalImgWrap.addEventListener("pointermove", e => {
+      const rect = modalImgWrap.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      if (isModalLoupeActive) {
+        updateModalLoupe(x, y);
+      }
+    });
+
+    modalImgWrap.addEventListener("pointerleave", () => {
+      if (!window.matchMedia("(pointer: coarse)").matches) {
+        modalLoupe.classList.remove("active");
+        isModalLoupeActive = false;
+        if (modalInspectToggle) modalInspectToggle.classList.remove("active");
+      }
+    });
+  }
+}
+
+// ==========================================================================
+// PART 6 — BOOK A TABLE FORM (SECURE DOM MANIPULATION & VALIDATION)
+// 100% textContent, No Raw innerHTML Injection, Strict Validation
+// ==========================================================================
+
+const bookingForm = document.getElementById("bookingForm");
+const nameInput = document.getElementById("bName");
+const phoneInput = document.getElementById("bPhone");
+const dateInput = document.getElementById("bDate");
+const timeInput = document.getElementById("bTime");
+const guestsInput = document.getElementById("bGuests");
+const requestInput = document.getElementById("bRequest");
+
+// Configure minimal date to today (without pre-filling fake date/time)
+if (dateInput) {
+  const todayStr = new Date().toISOString().split("T")[0];
+  dateInput.min = todayStr;
+}
+
+function setFieldError(fieldId, errorId, errorMsg) {
+  const inputEl = document.getElementById(fieldId);
+  const errorEl = document.getElementById(errorId);
+  if (!inputEl || !errorEl) return;
+
+  const parentGroup = inputEl.closest(".form-group");
+  if (errorMsg) {
+    if (parentGroup) parentGroup.classList.add("has-error");
+    errorEl.textContent = errorMsg;
+    inputEl.setAttribute("aria-invalid", "true");
+  } else {
+    if (parentGroup) parentGroup.classList.remove("has-error");
+    errorEl.textContent = "";
+    inputEl.removeAttribute("aria-invalid");
+  }
+}
+
+function validateBookingForm() {
+  let isValid = true;
+
+  // Name validation: 2-60 chars
+  const nameVal = nameInput ? nameInput.value.trim() : "";
+  if (!nameVal || nameVal.length < 2) {
+    setFieldError("bName", "nameError", "Please enter your full name (minimum 2 characters).");
+    isValid = false;
+  } else {
+    setFieldError("bName", "nameError", "");
+  }
+
+  // Phone validation: Indian 10-digit mobile number format
+  const phoneVal = phoneInput ? phoneInput.value.trim().replace(/[\s-]/g, "") : "";
+  const phoneRegex = /^(\+91)?[6-9]\d{9}$/;
+  if (!phoneRegex.test(phoneVal)) {
+    setFieldError("bPhone", "phoneError", "Please enter a valid 10-digit mobile number.");
+    isValid = false;
+  } else {
+    setFieldError("bPhone", "phoneError", "");
+  }
+
+  // Date validation: must be selected and not in past
+  const dateVal = dateInput ? dateInput.value : "";
+  if (!dateVal) {
+    setFieldError("bDate", "dateError", "Please select your preferred reservation date.");
+    isValid = false;
+  } else {
+    const selectedDate = new Date(dateVal);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (selectedDate < today) {
+      setFieldError("bDate", "dateError", "Reservation date cannot be in the past.");
+      isValid = false;
+    } else {
+      setFieldError("bDate", "dateError", "");
+    }
+  }
+
+  // Time validation: between 11:00 AM and 10:00 PM
+  const timeVal = timeInput ? timeInput.value : "";
+  if (!timeVal) {
+    setFieldError("bTime", "timeError", "Please select a dining time.");
+    isValid = false;
+  } else {
+    const [hrs, mins] = timeVal.split(":").map(Number);
+    const totalMinutes = hrs * 60 + mins;
+    if (totalMinutes < 660 || totalMinutes > 1320) {
+      setFieldError("bTime", "timeError", "Reservations available between 11:00 AM and 10:00 PM.");
+      isValid = false;
+    } else {
+      setFieldError("bTime", "timeError", "");
+    }
+  }
+
+  // Guests validation
+  const guestsVal = guestsInput ? guestsInput.value : "";
+  if (!guestsVal) {
+    setFieldError("bGuests", "guestsError", "Please specify the party size.");
+    isValid = false;
+  } else {
+    setFieldError("bGuests", "guestsError", "");
+  }
+
+  return isValid;
+}
+
+if (bookingForm) {
+  bookingForm.addEventListener("submit", e => {
+    e.preventDefault();
+
+    if (!validateBookingForm()) {
+      return;
+    }
+
+    const name = nameInput.value.trim().slice(0, 60);
+    const phone = phoneInput.value.trim().slice(0, 15);
+    const date = dateInput.value;
+    const time = timeInput.value;
+    const guests = guestsInput.value;
+    const request = requestInput ? requestInput.value.trim().slice(0, 200) : "";
+    const refCode = "A3-FOLIO-" + Math.floor(1000 + Math.random() * 9000);
+
+    // SECURE DOM CREATION: Zero innerHTML interpolation with user values
+    const receipt = document.getElementById("bookingReceipt");
+    receipt.textContent = "";
+
+    function appendReceiptLine(label, value) {
+      const line = document.createElement("div");
+      line.className = "receipt-line";
+
+      const labelSpan = document.createElement("span");
+      labelSpan.textContent = label + ":";
+
+      const valStrong = document.createElement("strong");
+      valStrong.textContent = value;
+
+      line.appendChild(labelSpan);
+      line.appendChild(valStrong);
+      receipt.appendChild(line);
+    }
+
+    appendReceiptLine("Reservation Ref", "#" + refCode);
+    appendReceiptLine("Guest Name", name);
+    appendReceiptLine("Contact", phone);
+    appendReceiptLine("Date & Time", `${date} at ${time}`);
+    appendReceiptLine("Party Size", `${guests} ${guests === "1" ? "Guest" : "Guests"}`);
+    if (request) {
+      appendReceiptLine("Special Notes", request);
+    }
+
+    const successBody = document.getElementById("successModalBody");
+    if (successBody) {
+      successBody.textContent = `Thank you, ${name}! Your table reservation request has been prepared for the hospitality desk. Please note this website is in digital dining demo mode.`;
+    }
+
+    modalTriggerElement = document.getElementById("btnSubmitBooking");
+    document.body.classList.add("modal-open");
+    bookingSuccessModal.classList.add("open");
+    bookingSuccessModal.setAttribute("aria-hidden", "false");
+
+    if (btnDoneBooking) btnDoneBooking.focus();
+
+    bookingForm.reset();
+  });
+}
+
+function closeSuccessModal() {
+  if (!bookingSuccessModal) return;
+  bookingSuccessModal.classList.remove("open");
+  bookingSuccessModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+  if (modalTriggerElement && typeof modalTriggerElement.focus === "function") {
+    modalTriggerElement.focus();
+  }
+}
+
+if (btnDoneBooking) btnDoneBooking.addEventListener("click", closeSuccessModal);
+if (bookingSuccessModal) {
+  bookingSuccessModal.addEventListener("click", e => {
+    if (e.target === bookingSuccessModal) closeSuccessModal();
+  });
+}
+
+// ==========================================================================
+// PART 7 — MOBILE NAVIGATION DRAWER
+// ==========================================================================
+
+if (hambBtn && drawerElement) {
+  hambBtn.addEventListener("click", () => {
+    const isOpen = drawerElement.classList.toggle("open");
+    hambBtn.classList.toggle("active", isOpen);
+    hambBtn.setAttribute("aria-expanded", isOpen.toString());
+    drawerElement.setAttribute("aria-hidden", (!isOpen).toString());
+    if (isOpen) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+  });
+
+  drawerElement.addEventListener("click", e => {
+    if (e.target.tagName === "A") {
+      drawerElement.classList.remove("open");
+      hambBtn.classList.remove("active");
+      hambBtn.setAttribute("aria-expanded", "false");
+      drawerElement.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+  });
+}
+
+// Global Escape Key Handler for All Overlays
+window.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    closeDishModal();
+    closeGallery();
+    closeSuccessModal();
+    if (drawerElement && drawerElement.classList.contains("open")) {
+      drawerElement.classList.remove("open");
+      if (hambBtn) {
+        hambBtn.classList.remove("active");
+        hambBtn.setAttribute("aria-expanded", "false");
+        hambBtn.focus();
+      }
+      document.body.classList.remove("modal-open");
+    }
   }
 });
 
-// 9. Scrollspy for Desktop Navigation
-const sections = document.querySelectorAll("main > section, footer");
-const navLinks = document.querySelectorAll(".desktop-nav .nav-link");
+// ==========================================================================
+// PART 8 — INTERSECTION OBSERVERS (SCROLL SPY & REVEAL ANIMATIONS)
+// Performance Optimized — Zero Continuous Polling Loops
+// ==========================================================================
 
-window.addEventListener("scroll", () => {
-  let currentId = "home";
-  const scrollPosition = window.scrollY + 100;
+const revealElements = document.querySelectorAll(".reveal-on-scroll");
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("revealed");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
 
-  sections.forEach(section => {
-    const top = section.offsetTop;
-    const height = section.offsetHeight;
-    if (scrollPosition >= top && scrollPosition < top + height) {
-      currentId = section.getAttribute("id") || currentId;
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  // Active Nav Link Spy via IntersectionObserver
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".desktop-nav .nav-link");
+
+  const navObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute("id");
+        navLinks.forEach(link => {
+          if (link.getAttribute("href") === `#${id}`) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      }
+    });
+  }, { rootMargin: "-40% 0px -50% 0px", threshold: 0 });
+
+  sections.forEach(sec => navObserver.observe(sec));
+} else {
+  // Fallback for older browsers
+  revealElements.forEach(el => el.classList.add("revealed"));
+}
+
+// ==========================================================================
+// PART 9 — APPLE-STYLE 3D SCROLL PARALLAX & CARD TILT SYSTEM
+// Performance Optimized with requestAnimationFrame — Zero jank
+// ==========================================================================
+
+// --- Hero Background Parallax on Scroll ---
+(function initHeroParallax() {
+  const heroBg = document.getElementById("heroBg");
+  const heroSection = document.getElementById("home");
+  if (!heroBg || !heroSection) return;
+
+  let ticking = false;
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const heroHeight = heroSection.offsetHeight;
+        if (scrollY <= heroHeight) {
+          const parallaxOffset = scrollY * 0.35;
+          const scale = 1.1 + (scrollY / heroHeight) * 0.08;
+          heroBg.style.transform = `translateY(${parallaxOffset}px) scale(${scale})`;
+          heroBg.style.filter = `brightness(${Math.max(0.15, 0.35 - (scrollY / heroHeight) * 0.2)}) saturate(1.2)`;
+        }
+        ticking = false;
+      });
+      ticking = true;
     }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+})();
+
+// --- 3D Card Tilt Effect on Hover ---
+(function init3DCardTilt() {
+  const cards = document.querySelectorAll(".dish-card, .signature-card, .contact-card");
+
+  cards.forEach(card => {
+    card.addEventListener("mousemove", e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -6;
+      const rotateY = ((x - centerX) / centerX) * 6;
+
+      card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "";
+    });
+  });
+})();
+
+// --- Staggered Reveal for Grid Children ---
+(function initStaggeredReveal() {
+  const grids = document.querySelectorAll(".dishes-grid, .contact-grid");
+
+  if ("IntersectionObserver" in window) {
+    const gridObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const children = entry.target.children;
+          Array.from(children).forEach((child, index) => {
+            child.style.opacity = "0";
+            child.style.transform = "translateY(40px)";
+            child.style.transition = `opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.08}s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.08}s`;
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                child.style.opacity = "1";
+                child.style.transform = "translateY(0)";
+              });
+            });
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    grids.forEach(grid => gridObserver.observe(grid));
+  }
+})();
+
+// --- Smooth Section Parallax (sections with data-speed) ---
+(function initSectionParallax() {
+  const parallaxSections = document.querySelectorAll("[data-speed]");
+  if (parallaxSections.length === 0) return;
+
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        parallaxSections.forEach(section => {
+          const speed = parseFloat(section.dataset.speed) || 0.1;
+          const rect = section.getBoundingClientRect();
+          const offset = rect.top * speed;
+          section.style.transform = `translateY(${offset}px)`;
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+})();
+
+// --- Smooth Navbar Show/Hide on Scroll ---
+(function initNavbarScrollBehavior() {
+  const header = document.getElementById("header");
+  if (!header) return;
+
+  let lastScrollY = 0;
+  let ticking = false;
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY > 100) {
+          header.style.borderBottomColor = "rgba(255, 255, 255, 0.08)";
+          header.style.backgroundColor = "rgba(0, 0, 0, 0.85)";
+        } else {
+          header.style.borderBottomColor = "rgba(255, 255, 255, 0.04)";
+          header.style.backgroundColor = "rgba(0, 0, 0, 0.72)";
+        }
+
+        lastScrollY = currentScrollY;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
+// --- Experience Section Image Parallax ---
+(function initShowcaseParallax() {
+  const showcase = document.querySelector(".experience-showcase");
+  const showcaseImg = document.querySelector(".showcase-img");
+  if (!showcase || !showcaseImg) return;
+
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const rect = showcase.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
+          const translateY = (progress - 0.5) * -50;
+          showcaseImg.style.transform = `scale(1.1) translateY(${translateY}px)`;
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
+
+// ==========================================================================
+// PART 10 — THREE.JS 3D AMBIENT RESTAURANT LIGHTING & VOLUMETRIC SCENE
+// Warm orange/amber restaurant illumination, floating embers, 3D cursor light
+// ==========================================================================
+
+function init3DRestaurantAtmosphere() {
+  try {
+    const canvas = document.getElementById("bg-canvas-3d");
+    if (!canvas || typeof THREE === "undefined") return;
+
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 0, 32);
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true,
+    antialias: true,
+    powerPreference: "high-performance"
+  });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // 1. Ambient Lighting (Warm Deep Burgundy/Espresso Base)
+  const ambientLight = new THREE.AmbientLight(0x281204, 1.4);
+  scene.add(ambientLight);
+
+  // 2. Volumetric Orange & Amber Restaurant Lights
+  // Chandelier / Ceiling Pendant Warm Glow (Amber)
+  const amberPointLight = new THREE.PointLight(0xff8c00, 3.8, 55, 1.5);
+  amberPointLight.position.set(12, 14, 10);
+  scene.add(amberPointLight);
+
+  // Deep Hearth / Flame Heat Glow (Orange-Red Warmth)
+  const hearthPointLight = new THREE.PointLight(0xff4500, 2.5, 60, 1.6);
+  hearthPointLight.position.set(-16, -12, 8);
+  scene.add(hearthPointLight);
+
+  // Soft Golden Candle Light
+  const candleLight = new THREE.PointLight(0xffbe40, 2.2, 40, 1.8);
+  candleLight.position.set(0, -6, 12);
+  scene.add(candleLight);
+
+  // Interactive 3D Cursor Light (Follows mouse in 3D perspective space)
+  const cursorPointLight = new THREE.PointLight(0xffa726, 3.0, 32, 1.8);
+  cursorPointLight.position.set(0, 0, 15);
+  scene.add(cursorPointLight);
+
+  // 3. Floating 3D Golden Embers & Bokeh Culinary Particles
+  function createGlowTexture() {
+    const pCanvas = document.createElement("canvas");
+    pCanvas.width = 64;
+    pCanvas.height = 64;
+    const ctx = pCanvas.getContext("2d");
+    const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gradient.addColorStop(0, "rgba(255, 240, 180, 1)");
+    gradient.addColorStop(0.25, "rgba(255, 160, 30, 0.85)");
+    gradient.addColorStop(0.65, "rgba(240, 90, 0, 0.35)");
+    gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(32, 32, 32, 0, Math.PI * 2);
+    ctx.fill();
+    return new THREE.CanvasTexture(pCanvas);
+  }
+
+  const particleCount = 220;
+  const particleGeo = new THREE.BufferGeometry();
+  const positions = new Float32Array(particleCount * 3);
+  const velocities = [];
+
+  for (let i = 0; i < particleCount; i++) {
+    const x = (Math.random() - 0.5) * 60;
+    const y = (Math.random() - 0.5) * 60;
+    const z = (Math.random() - 0.5) * 35;
+    positions[i * 3] = x;
+    positions[i * 3 + 1] = y;
+    positions[i * 3 + 2] = z;
+
+    velocities.push({
+      speedY: 0.015 + Math.random() * 0.035,
+      swaySpeed: 0.5 + Math.random() * 1.5,
+      swayRadius: 0.3 + Math.random() * 0.8,
+      seed: Math.random() * Math.PI * 2
+    });
+  }
+
+  particleGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+
+  const particleMat = new THREE.PointsMaterial({
+    size: 2.2,
+    map: createGlowTexture(),
+    transparent: true,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
   });
 
-  navLinks.forEach(link => {
-    const href = link.getAttribute("href").replace("#", "");
-    if (href === currentId) {
-      link.classList.add("active");
-    } else {
-      link.classList.remove("active");
-    }
-  });
-}, { passive: true });
+  const particleSystem = new THREE.Points(particleGeo, particleMat);
+  scene.add(particleSystem);
 
-// 10. Initial Render
-renderDishes("All");
+  // 4. Subtle 3D Luxury Wireframe Geometry
+  const ringGeo = new THREE.TorusGeometry(12, 0.15, 16, 100);
+  const ringMat = new THREE.MeshBasicMaterial({
+    color: 0xffa028,
+    transparent: true,
+    opacity: 0.15,
+    wireframe: true
+  });
+  const luxuryRing = new THREE.Mesh(ringGeo, ringMat);
+  luxuryRing.position.set(0, 0, -5);
+  luxuryRing.rotation.x = Math.PI / 3;
+  scene.add(luxuryRing);
+
+  const crystalGeo = new THREE.IcosahedronGeometry(7, 1);
+  const crystalMat = new THREE.MeshBasicMaterial({
+    color: 0xff7010,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.10
+  });
+  const crystalMesh = new THREE.Mesh(crystalGeo, crystalMat);
+  crystalMesh.position.set(16, -10, -10);
+  scene.add(crystalMesh);
+
+  // Mouse & Scroll Interactivity
+  let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+  let scrollProgress = 0;
+
+  window.addEventListener("mousemove", e => {
+    mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
+    mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+  }, { passive: true });
+
+  window.addEventListener("scroll", () => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    scrollProgress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+  }, { passive: true });
+
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }, { passive: true });
+
+  // Animation Loop with Candlelight Breathing
+  let clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    if (document.hidden) return;
+
+    const elapsedTime = clock.getElapsedTime();
+
+    // Smooth mouse coordinates
+    mouse.x += (mouse.targetX - mouse.x) * 0.06;
+    mouse.y += (mouse.targetY - mouse.y) * 0.06;
+
+    // 1. Oscillate Restaurant Point Lights (Flickering Warm Ambiance)
+    amberPointLight.position.x = 12 + Math.sin(elapsedTime * 0.7) * 4;
+    amberPointLight.position.y = 14 + Math.cos(elapsedTime * 0.5) * 3;
+    amberPointLight.intensity = 3.6 + Math.sin(elapsedTime * 2.2) * 0.4;
+
+    hearthPointLight.position.x = -16 + Math.cos(elapsedTime * 0.6) * 3;
+    hearthPointLight.position.y = -12 + Math.sin(elapsedTime * 0.8) * 4;
+    hearthPointLight.intensity = 2.4 + Math.cos(elapsedTime * 1.8) * 0.35;
+
+    // Move interactive cursor spotlight in 3D
+    cursorPointLight.position.x = mouse.x * 24;
+    cursorPointLight.position.y = mouse.y * 18;
+
+    // 2. Camera Parallax & Scroll Depth
+    camera.position.x = mouse.x * 3;
+    camera.position.y = mouse.y * 2 - scrollProgress * 15;
+    camera.position.z = 32 - scrollProgress * 10;
+    camera.lookAt(0, -scrollProgress * 12, 0);
+
+    // 3. Float 3D Particles
+    const pos = particleGeo.attributes.position.array;
+    for (let i = 0; i < particleCount; i++) {
+      const v = velocities[i];
+      pos[i * 3 + 1] += v.speedY; // rise
+      pos[i * 3] += Math.sin(elapsedTime * v.swaySpeed + v.seed) * 0.02; // sway
+
+      // Wrap around when rising past ceiling
+      if (pos[i * 3 + 1] > 32) {
+        pos[i * 3 + 1] = -32;
+        pos[i * 3] = (Math.random() - 0.5) * 60;
+      }
+    }
+    particleGeo.attributes.position.needsUpdate = true;
+
+    // 4. Rotate 3D Geometry
+    luxuryRing.rotation.z += 0.002;
+    luxuryRing.rotation.y += 0.0015;
+    crystalMesh.rotation.x += 0.003;
+    crystalMesh.rotation.y += 0.004;
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+  } catch (err) {
+    console.warn("3D WebGL atmosphere fallback:", err);
+  }
+}
+
+// ==========================================================================
+// PART 11 — INITIALIZATION & INTERACTIVE CARD SPOTLIGHTS
+// ==========================================================================
+
+initCinematicWelcome();
+renderMenu();
+initTactileLoupe();
+init3DRestaurantAtmosphere();
+
+// Re-initialize 3D tilt and warm spotlights after menu renders
+function attachCard3DSpotlights() {
+  const cards = document.querySelectorAll(".dish-card, .contact-card");
+  cards.forEach(card => {
+    card.addEventListener("mousemove", e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Pass coordinates to CSS for dynamic radial spotlight
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -6.5;
+      const rotateY = ((x - centerX) / centerX) * 6.5;
+      card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "";
+    });
+  });
+}
+
+requestAnimationFrame(attachCard3DSpotlights);

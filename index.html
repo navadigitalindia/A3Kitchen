@@ -1,319 +1,534 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A3 Kitchen - Premium Digital Restaurant Menu. Explore our authentic culinary selections, today's specials, and table reservations." />
-  <title>A3 Kitchen | Digital Restaurant Menu</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A3 Kitchen — QR Digital Restaurant Menu & In-House Dining Experience. Authentic Flavours, Fresh Ingredients, Memorable Moments. Located at Dwarka, Tirumala.">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:title" content="A3 Kitchen | Digital Dining Menu · Dwarka, Tirumala">
+  <meta property="og:description" content="Authentic Flavours · Fresh Ingredients · Memorable Moments. Explore our digital dining menu.">
+  <meta property="og:image" content="assets/images/hero.jpg">
+  <meta property="og:type" content="restaurant.restaurant">
+  <title>A3 Kitchen | Digital Dining Menu · Dwarka, Tirumala</title>
+  
+  <!-- Favicon Monogram -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23031726'/><text x='50%' y='63%' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='48' font-weight='bold' fill='%23C8A96B'>A3</text></svg>">
+  
+  <!-- JSON-LD Structured Data for Restaurant -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "A3 Kitchen",
+    "image": "assets/images/hero.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Main Road, Near Dwarka Temple Circle",
+      "addressLocality": "Dwarka, Tirumala",
+      "addressRegion": "Andhra Pradesh",
+      "addressCountry": "IN"
+    },
+    "servesCuisine": ["Indian", "Biryani", "Tandoori", "Chinese"],
+    "openingHours": "Mo-Su 11:00-22:30",
+    "priceRange": "₹₹"
+  }
+  </script>
+
+  <!-- Google Fonts: Playfair Display (Headings) & Inter (Body/UI) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..600&family=Playfair+Display:ital,wght@0,500..800;1,500..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header -->
-  <header class="site-header" id="siteHeader">
-    <div class="header-inner container">
-      <a class="brand" href="#home" aria-label="A3 Kitchen Home">
-        <span class="brand-mark">A3</span>
-        <span class="brand-text">
-          <strong class="brand-title">A3 KITCHEN</strong>
-          <small class="brand-tagline">Authentic Dining · Dwarka</small>
-        </span>
-      </a>
 
-      <nav class="desktop-nav" id="mainNav" aria-label="Main navigation">
-        <a class="nav-link active" href="#home">Home</a>
-        <a class="nav-link" href="#special">Special</a>
-        <a class="nav-link" href="#menu">Menu</a>
-        <a class="nav-link" href="#book">Book Table</a>
-        <a class="nav-link" href="#about">About</a>
-        <a class="nav-link" href="#contact">Contact</a>
-      </nav>
+  <!-- Fullscreen 3D Ambient Restaurant Lighting & Particle Canvas -->
+  <canvas id="bg-canvas-3d" aria-hidden="true"></canvas>
 
-      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileDrawer" aria-label="Toggle navigation menu">
-        <span class="menu-toggle-bar"></span>
-        <span class="menu-toggle-bar"></span>
-        <span class="menu-toggle-bar"></span>
-      </button>
+  <!-- ======================================================================
+       PART 1 — CINEMATIC WELCOME EXPERIENCE (QR SCAN DESTINATION)
+       2.5 - 3.5 Second Sequence: Atmosphere → Brand Reveal → Restaurant
+       ====================================================================== -->
+  <div class="cinematic-welcome" id="cinematicWelcome" aria-label="Welcome Experience">
+    <button class="btn-skip-welcome" id="skipWelcomeBtn" aria-label="Skip introduction">Skip Intro</button>
+    
+    <div class="welcome-stage-bg">
+      <div class="welcome-bg-image" id="welcomeBgImg"></div>
+      <div class="welcome-gradient-curtain"></div>
     </div>
 
-    <!-- Mobile Navigation Drawer -->
-    <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
-      <div class="mobile-drawer-content">
-        <nav class="mobile-nav" aria-label="Mobile navigation">
-          <a class="mobile-nav-link" href="#home">Home</a>
-          <a class="mobile-nav-link" href="#special">Special</a>
-          <a class="mobile-nav-link" href="#menu">Menu</a>
-          <a class="mobile-nav-link" href="#book">Book Table</a>
-          <a class="mobile-nav-link" href="#about">About</a>
-          <a class="mobile-nav-link" href="#contact">Contact</a>
-        </nav>
-        <div class="mobile-drawer-footer">
-          <p class="mobile-drawer-info">Dwarka, Tirumala</p>
-          <p class="mobile-drawer-hours">11:00 AM – 11:00 PM</p>
+    <div class="welcome-stages-container">
+      <!-- Stage 1 (0.0s): A3 Monogram -->
+      <div class="welcome-stage stage-1" id="stage1">
+        <div class="welcome-mark">A3</div>
+      </div>
+
+      <!-- Stage 2 (1.0s): A3 Kitchen & Dwarka, Tirumala -->
+      <div class="welcome-stage stage-2" id="stage2">
+        <h2 class="welcome-brand">A3 KITCHEN</h2>
+        <span class="welcome-kicker">Dwarka, Tirumala</span>
+      </div>
+
+      <!-- Stage 3 (2.5s): Welcome & Explore Menu -->
+      <div class="welcome-stage stage-3" id="stage3">
+        <span class="welcome-kicker-small">WELCOME TO</span>
+        <h1 class="welcome-main-title">A3 KITCHEN</h1>
+        <p class="welcome-tagline">Authentic Flavours <span class="dot-sep">·</span> Fresh Ingredients <span class="dot-sep">·</span> Memorable Moments</p>
+        <div class="welcome-action-wrap">
+          <button class="btn-welcome-explore" id="welcomeExploreBtn">Explore Menu →</button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MINIMAL STICKY HEADER
+       Desktop: Home | Menu | Special | Experience | About | Contact | Book a Table
+       Mobile: Logo + Hamburger Menu
+       ====================================================================== -->
+  <header id="header">
+    <div class="header-container">
+      <a class="brand-logo" href="#home" aria-label="A3 Kitchen Home">
+        <img src="A3 Kitchen Logo Gold.png" alt="A3 Kitchen" class="logo-img">
+      </a>
+
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#menu" class="nav-link">Menu</a>
+        <a href="#special" class="nav-link">Special</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="#booking" class="btn-pill-dark nav-btn">Book a Table</a>
+      </nav>
+
+      <button class="mobile-toggle" id="hamb" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="drawer">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </div>
   </header>
 
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="drawer" aria-hidden="true">
+    <nav class="drawer-nav">
+      <a href="#home">Home</a>
+      <a href="#menu">Explore Menu</a>
+      <a href="#special">Today's Special</a>
+      <a href="#experience">The Experience</a>
+      <a href="#about">About A3 Kitchen</a>
+      <a href="#contact">Contact</a>
+      <a href="#booking" class="btn-pill-dark drawer-btn">Book a Table</a>
+    </nav>
+  </div>
+
   <main>
-    <!-- Hero Section (Dark Navy / Photographic) -->
-    <section class="hero" id="home">
-      <div class="hero-overlay"></div>
-      <div class="hero-content container">
-        <p class="eyebrow">WELCOME TO</p>
-        <h1 class="hero-title">A3 Kitchen</h1>
-        <p class="hero-subtitle">Authentic Flavours <span>•</span> Fresh Ingredients <span>•</span> Memorable Moments</p>
-        <p class="location">Dwarka, Tirumala</p>
-        <p class="qr-note">Scan the QR code at your table to explore our menu.</p>
-        <div class="hero-action">
-          <a class="primary-button" href="#menu">Explore Menu</a>
+    <!-- ======================================================================
+         PART 2 — HOME / HERO FIRST IMPRESSION (SKETCHBOOK FOLIO I)
+         Warm natural lighting, restaurant photography, botanical paper atmosphere
+         ====================================================================== -->
+    <section class="hero-section" id="home">
+      <div class="hero-bg-container">
+        <img src="assets/images/hero.jpg" alt="A3 Kitchen Restaurant Exterior with Tirumala backdrop" class="hero-bg-img" id="heroBg">
+        <div class="hero-gradient-overlay"></div>
+        <div class="ambient-restaurant-glow glow-hero" aria-hidden="true"></div>
+      </div>
+      <div class="hero-content reveal-on-scroll">
+        <div class="hero-folio-badge">
+          <span class="folio-mark">❦</span>
+          <span class="folio-text">FOLIO 01 · DWARKA, TIRUMALA</span>
+          <span class="folio-mark">❦</span>
+        </div>
+        <h1 class="hero-title">A3 KITCHEN</h1>
+        <p class="hero-subline">
+          Authentic Flavours <span class="sep-dot">·</span> Fresh Ingredients <span class="sep-dot">·</span> Memorable Moments
+        </p>
+        <div class="hero-location">
+          <span>Sacred Hills Hospitality & Artisan Kitchen</span>
+        </div>
+        <div class="hero-cta-group">
+          <a class="btn-pill-dark hero-btn" href="#menu">
+            Explore Menu & Plate Index <span class="btn-arrow">→</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Today's Special Section (Dark Premium Section) -->
+    <!-- ======================================================================
+         PART 3 — TODAY'S SPECIAL (ILLUSTRATED PLATE № 01)
+         Editorial layout with Draggable Magnifying Loupe & Zoom Controls
+         ====================================================================== -->
     <section class="special-section" id="special">
-      <div class="container">
-        <div class="special-card">
-          <div class="special-copy">
-            <p class="eyebrow">TODAY'S SPECIAL</p>
-            <h2 class="special-title">Special Chicken Biryani</h2>
-            <p class="special-desc">Aromatic long-grain basmati rice layered with tender spiced chicken, saffron infusion, and caramelized shallots, slow-cooked in traditional dum style for an exquisite dining experience.</p>
-            <div class="special-price-row">
-              <span class="price-label">Chef's Feature</span>
-              <span class="price-value">₹260</span>
+      <div class="ambient-restaurant-glow glow-special" aria-hidden="true"></div>
+      <div class="special-container">
+        <div class="special-image-box reveal-on-scroll" id="specialPlateFrame">
+          <div class="plate-inner-rim">
+            <div class="plate-image-container" id="specialPlateContainer">
+              <img src="assets/images/mutton-biryani-special.jpg" alt="Chef's Special Mutton Biryani Plate" class="special-img" id="specialPlateImg" loading="lazy">
+              <!-- Draggable Magnifying Glass Loupe -->
+              <div class="sketchbook-loupe" id="specialLoupe" aria-hidden="true">
+                <div class="loupe-lens" id="specialLoupeLens"></div>
+                <div class="loupe-crosshair"></div>
+                <div class="loupe-glare"></div>
+                <div class="loupe-tag" id="specialLoupeTag">2.5× TACTILE ZOOM</div>
+              </div>
             </div>
-            <div class="special-cta-row">
-              <a class="primary-button" href="#menu">View Menu</a>
+            <!-- Zoom Controls -->
+            <div class="loupe-toolbar">
+              <button class="btn-loupe-action" id="inspectSpecialBtn" aria-label="Toggle magnifying glass inspection">
+                <span class="loupe-icon">🔍</span> <span id="inspectBtnText">Inspect Spices</span>
+              </button>
+              <div class="loupe-zoom-controls" id="specialZoomControls">
+                <button class="btn-zoom-step" id="zoomOutBtn" aria-label="Zoom out">−</button>
+                <span class="zoom-level-indicator" id="zoomLevelIndicator">2.5×</span>
+                <button class="btn-zoom-step" id="zoomInBtn" aria-label="Zoom in">+</button>
+                <button class="btn-zoom-reset" id="zoomResetBtn" aria-label="Reset zoom">↺</button>
+              </div>
             </div>
           </div>
-          <div class="special-image-wrap">
-            <img class="special-image" src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=1200&q=85" alt="A3 Kitchen Special Chicken Biryani" loading="lazy" />
+        </div>
+
+        <div class="special-info-box reveal-on-scroll">
+          <div class="special-kicker-row">
+            <span class="section-kicker"><span class="kicker-leaf">❦</span> TODAY'S SPECIAL · PLATE № 01</span>
+          </div>
+
+          <span class="chef-badge">Chef's Signature Recommendation</span>
+          <h2 class="special-title">Mutton Biryani</h2>
+          <p class="special-desc">
+            Aromatic aged basmati rice layered with tender local mutton and hand-roasted spices. Slow-cooked in sealed earthen handis to trap succulent juices, saffron steam, and rich ghee aroma.
+          </p>
+          
+          <div class="special-meta-row">
+            <div class="special-price">₹280</div>
+            <div class="diet-indicator nonveg" title="Non-Vegetarian">
+              <span class="diet-box"><span class="diet-dot"></span></span>
+              <span class="diet-label">Non-Veg</span>
+            </div>
+            <span class="plate-tag">Slow Dum Cooked</span>
+          </div>
+
+          <div class="special-actions">
+            <a class="btn-pill-dark" href="#menu">
+              Explore Full Menu <span class="btn-arrow">→</span>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Menu Section (Light Cream Background / White Cards) -->
+    <!-- ======================================================================
+         PART 4 — MENU — EDITORIAL SKETCHBOOK PLATE INDEX
+         Explore Our Menu + Editorial Index Tabs + Curled Cards
+         ====================================================================== -->
     <section class="menu-section" id="menu">
-      <div class="container">
-        <div class="menu-header">
-          <p class="eyebrow">OUR MENU</p>
-          <h2 class="section-title">Explore our selection of freshly prepared dishes.</h2>
-          <p class="menu-subtitle">Every dish is prepared to order using authentic spices and premium ingredients.</p>
-        </div>
+      <div class="menu-header reveal-on-scroll">
+        <span class="section-kicker"><span class="kicker-leaf">❦</span> FOLIO II · CULINARY ARCHIVE</span>
+        <h2 class="section-title">The Menu & Plate Index</h2>
+        <p class="section-subtitle">Dwarka Tirumala Edition · Handcrafted Recipes & Fresh Daily Harvest</p>
+      </div>
 
-        <!-- Clean Pill/Tab Category Buttons -->
-        <div class="category-nav-wrap">
-          <div class="category-nav" id="categoryNav" role="tablist" aria-label="Menu categories">
-            <button class="category-tab active" data-category="All" role="tab" aria-selected="true">All</button>
-            <button class="category-tab" data-category="Veg" role="tab" aria-selected="false">Veg</button>
-            <button class="category-tab" data-category="Non-Veg" role="tab" aria-selected="false">Non-Veg</button>
-            <button class="category-tab" data-category="Starters" role="tab" aria-selected="false">Starters</button>
-            <button class="category-tab" data-category="Main Course" role="tab" aria-selected="false">Main Course</button>
-            <button class="category-tab" data-category="Biryani" role="tab" aria-selected="false">Biryani</button>
-            <button class="category-tab" data-category="Chinese" role="tab" aria-selected="false">Chinese</button>
-            <button class="category-tab" data-category="Beverages" role="tab" aria-selected="false">Beverages</button>
-            <button class="category-tab" data-category="Desserts" role="tab" aria-selected="false">Desserts</button>
-          </div>
+      <!-- Sticky Categories Bar Container (Editorial Index) -->
+      <div class="categories-sticky-wrapper" id="categoriesStickyWrapper">
+        <div class="categories-bar reveal-on-scroll" id="cats" role="tablist" aria-label="Menu plate index categories">
+          <button class="cat-pill active" data-cat="all" role="tab" aria-selected="true">
+            <span class="tab-num">I.</span> All <span class="tab-count">10</span>
+          </button>
+          <button class="cat-pill" data-cat="veg" role="tab" aria-selected="false">
+            <span class="tab-num">II.</span> Pure Veg
+          </button>
+          <button class="cat-pill" data-cat="nonveg" role="tab" aria-selected="false">
+            <span class="tab-num">III.</span> Non-Veg
+          </button>
+          <button class="cat-pill" data-cat="starters" role="tab" aria-selected="false">
+            <span class="tab-num">IV.</span> Starters
+          </button>
+          <button class="cat-pill" data-cat="main" role="tab" aria-selected="false">
+            <span class="tab-num">V.</span> Main Course
+          </button>
+          <button class="cat-pill" data-cat="biryani" role="tab" aria-selected="false">
+            <span class="tab-num">VI.</span> Biryani
+          </button>
+          <button class="cat-pill" data-cat="chinese" role="tab" aria-selected="false">
+            <span class="tab-num">VII.</span> Chinese
+          </button>
+          <button class="cat-pill" data-cat="beverages" role="tab" aria-selected="false">
+            <span class="tab-num">VIII.</span> Beverages
+          </button>
+          <button class="cat-pill" data-cat="desserts" role="tab" aria-selected="false">
+            <span class="tab-num">IX.</span> Desserts
+          </button>
         </div>
+      </div>
 
-        <!-- Menu Toolbar -->
-        <div class="menu-toolbar">
-          <div class="toolbar-title-wrap">
-            <h3 class="toolbar-title" id="activeCategoryHeading">All Dishes</h3>
-            <span class="diet-legend">
-              <span class="legend-item"><span class="diet-indicator veg"></span> Veg</span>
-              <span class="legend-item"><span class="diet-indicator non-veg"></span> Non-Veg</span>
-            </span>
-          </div>
-          <span class="menu-count" id="menuCount">Showing dishes</span>
-        </div>
-
-        <!-- Dish Grid -->
-        <div class="dish-grid" id="dishGrid" aria-live="polite"></div>
+      <!-- Standardized Food Cards Grid with Curled Page Transitions -->
+      <div class="dishes-grid" id="grid">
+        <!-- Rendered with identical structure by script.js -->
       </div>
     </section>
 
-    <!-- Book A Table Section (Dark Navy Section) -->
-    <section class="booking-section" id="book">
-      <div class="container">
-        <div class="booking-layout">
-          <div class="booking-copy">
-            <p class="eyebrow">BOOK A TABLE</p>
-            <h2 class="section-title-light">Plan Your Next Visit</h2>
-            <p class="booking-desc">Reserve your table in advance and enjoy a comfortable dining experience with us. Ideal for family gatherings, celebrations, and intimate dinners.</p>
-            <button class="primary-button" id="openBooking" type="button">Book Table</button>
-          </div>
-
-          <div class="info-panel">
-            <div class="info-item">
-              <span class="info-label">Opening Hours</span>
-              <span class="info-value">11:00 AM – 11:00 PM</span>
-              <small class="info-subtext">Open all 7 days for Lunch & Dinner</small>
-            </div>
-            <div class="info-item">
-              <span class="info-label">Location</span>
-              <span class="info-value">Dwarka, Tirumala</span>
-              <small class="info-subtext">Dine-in with spacious family seating</small>
-            </div>
-            <div class="info-item">
-              <span class="info-label">Contact</span>
-              <span class="info-value">+91 98765 43210</span>
-              <small class="info-subtext">For instant table queries & private events</small>
-            </div>
+    <!-- ======================================================================
+         PART 7 — RESTAURANT EXPERIENCE (FOLIO IV · THE SANCTUARY)
+         Transition from Food → Atmosphere: THE EXPERIENCE
+         ====================================================================== -->
+    <section class="experience-section" id="experience">
+      <div class="experience-showcase reveal-on-scroll">
+        <img src="assets/images/experience-interior.jpg" alt="Dining Ambiance at A3 Kitchen" class="showcase-img" loading="lazy">
+        <div class="showcase-overlay">
+          <div class="showcase-copy">
+            <span class="section-kicker gold-kicker"><span class="kicker-leaf">❦</span> FOLIO IV · THE SANCTUARY</span>
+            <h2 class="showcase-title">
+              Good Food.<br>
+              Warm Service.<br>
+              Memorable Moments.
+            </h2>
+            <p class="showcase-subtext">Step inside a sanctuary of warm wood, soft evening glow, and gracious hospitality overlooking Dwarka Tirumala.</p>
+            <button class="btn-outline-light" id="openGallery">
+              View Interior Gallery <span class="btn-arrow">→</span>
+            </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- About Section (Light Cream Section) -->
+    <!-- ======================================================================
+         PART 8 — BOOK A TABLE (FOLIO V · HOSPITALITY DESK)
+         PLAN YOUR NEXT VISIT
+         ====================================================================== -->
+    <section class="booking-section" id="booking">
+      <div class="booking-container reveal-on-scroll">
+        <div class="booking-header">
+          <span class="section-kicker"><span class="kicker-leaf">❦</span> FOLIO V · HOSPITALITY DESK</span>
+          <h2 class="booking-title">Reserve Your Table</h2>
+          <p class="booking-subtitle">Plan your upcoming visit, family gathering, or sacred feast in Dwarka, Tirumala.</p>
+        </div>
+
+        <form class="reservation-form" id="bookingForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bName">Full Name *</label>
+              <input type="text" id="bName" required maxlength="60" placeholder="e.g. Rahul Sharma" autocomplete="name">
+              <span class="field-error" id="nameError" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="bPhone">Phone Number *</label>
+              <input type="tel" id="bPhone" required maxlength="15" placeholder="10-digit mobile number" autocomplete="tel">
+              <span class="field-error" id="phoneError" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bDate">Reservation Date *</label>
+              <input type="date" id="bDate" required>
+              <span class="field-error" id="dateError" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="bTime">Preferred Time * <small>(11:00 AM – 10:00 PM)</small></label>
+              <input type="time" id="bTime" required min="11:00" max="22:00">
+              <span class="field-error" id="timeError" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bGuests">Number of Guests *</label>
+              <select id="bGuests" required>
+                <option value="" disabled selected>Select number of guests</option>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+                <option value="6">6 Guests</option>
+                <option value="7+">7+ Guests (Large Party)</option>
+              </select>
+              <span class="field-error" id="guestsError" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="bRequest">Special Request <small>(Optional)</small></label>
+              <input type="text" id="bRequest" maxlength="200" placeholder="Window table, anniversary, high chair...">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-pill-dark btn-submit-booking" id="btnSubmitBooking">
+            Prepare Reservation Request <span class="btn-arrow">→</span>
+          </button>
+        </form>
+
+        <div class="booking-alert" id="bookingAlert" role="alert"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PART 9 — ABOUT A3 KITCHEN (FOLIO VI · TIME-HONOURED ROOTS)
+         More Than Just a Meal
+         ====================================================================== -->
     <section class="about-section" id="about">
-      <div class="container">
-        <div class="about-grid">
-          <div class="about-copy">
-            <p class="eyebrow">ABOUT A3 KITCHEN</p>
-            <h2 class="about-title">A modern digital menu for a memorable dining experience.</h2>
-            <p class="about-text">A3 Kitchen celebrates the rich heritage of Indian cuisine, crafted with authentic home-ground spice blends and pristine local produce. Every recipe honouring traditional dum cooking and tandoor craft is freshly prepared to ensure warmth and uncompromised taste in every bite.</p>
-            <p class="about-text">This digital menu enables guests to effortlessly browse our full culinary collection right from their table by scanning the QR code, offering a fast, paperless, and seamless dine-in experience.</p>
-            <div class="about-details">
-              <div class="about-detail-box">
-                <span class="about-detail-label">Location</span>
-                <span class="about-detail-value">Dwarka, Tirumala</span>
-              </div>
-              <div class="about-detail-box">
-                <span class="about-detail-label">Opening Hours</span>
-                <span class="about-detail-value">11:00 AM – 11:00 PM</span>
-              </div>
-              <div class="about-detail-box">
-                <span class="about-detail-label">Direct Contact</span>
-                <span class="about-detail-value">+91 98765 43210</span>
-              </div>
-            </div>
+      <div class="about-container reveal-on-scroll">
+        <div class="about-img-frame editorial-plate-frame">
+          <img src="assets/images/about-interior.jpg" alt="A3 Kitchen Restaurant Interior" class="about-img" loading="lazy">
+          <div class="plate-corner-curl" aria-hidden="true"></div>
+        </div>
+        <div class="about-content">
+          <span class="section-kicker"><span class="kicker-leaf">❦</span> FOLIO VI · OUR ROOTS</span>
+          <h2 class="about-title">More Than Just a Meal</h2>
+          <p class="about-text">
+            Rooted in the timeless pilgrimage town of Dwarka, Tirumala, A3 Kitchen unites authentic culinary heritage, hand-pounded spices, and heartfelt Indian hospitality. Every handi and plate is prepared with slow-cooked patience and deep reverence for good food.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PART 10 — CONTACT (FOLIO VII · RESTAURANT DESK)
+         Get In Touch
+         ====================================================================== -->
+    <section class="contact-section" id="contact">
+      <div class="contact-container reveal-on-scroll">
+        <div class="contact-header">
+          <span class="section-kicker"><span class="kicker-leaf">❦</span> FOLIO VII · GET IN TOUCH</span>
+          <h2 class="contact-title">Restaurant Details</h2>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <span class="contact-card-label">Phone</span>
+            <a href="tel:+919876543210" class="contact-card-value">+91 98765 43210</a>
           </div>
-          <div class="about-media">
-            <img class="about-image" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=85" alt="A3 Kitchen Restaurant Interior Dining Room" loading="lazy" />
+
+          <div class="contact-card">
+            <span class="contact-card-label">Email</span>
+            <a href="mailto:hello@a3kitchen.in" class="contact-card-value">hello@a3kitchen.in</a>
           </div>
+
+          <div class="contact-card">
+            <span class="contact-card-label">Instagram</span>
+            <a href="https://instagram.com/a3_kitchens" target="_blank" rel="noopener" class="contact-card-value">@a3_kitchens</a>
+          </div>
+
+          <div class="contact-card">
+            <span class="contact-card-label">Hours</span>
+            <span class="contact-card-value">Open Daily<br><small>11:00 AM – 10:30 PM</small></span>
+          </div>
+        </div>
+
+        <div class="contact-minimal-loc">
+          <span>Main Road, Near Dwarka Temple Circle, Tirumala</span>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer (Deep Navy) -->
-  <footer class="site-footer" id="contact">
-    <div class="container footer-grid">
-      <div class="brand footer-brand">
-        <span class="brand-mark">A3</span>
-        <span class="brand-text">
-          <strong class="brand-title">A3 KITCHEN</strong>
-          <small class="brand-tagline">Authentic Dining · Dwarka, Tirumala</small>
-        </span>
+  <!-- ======================================================================
+       PART 11 — FOOTER
+       Clean dark navy footer with botanical sketchbook mark
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand-block">
+        <a class="brand-logo footer-logo" href="#home">
+          <img src="A3 Kitchen Logo Gold.png" alt="A3 Kitchen" class="logo-img">
+        </a>
       </div>
 
-      <nav class="footer-links" aria-label="Footer quick links">
+      <nav class="footer-nav" aria-label="Footer Navigation">
         <a href="#home">Home</a>
         <a href="#menu">Menu</a>
         <a href="#special">Special</a>
-        <a href="#book">Book Table</a>
+        <a href="#experience">Experience</a>
         <a href="#about">About</a>
+        <a href="#contact">Contact</a>
       </nav>
 
-      <div class="footer-social">
-        <a class="instagram-link" href="https://www.instagram.com/a3_kitchens/" target="_blank" rel="noopener noreferrer" aria-label="Follow A3 Kitchen on Instagram">
-          <span>Instagram</span>
+      <div class="footer-social-wrap">
+        <a href="https://instagram.com/a3_kitchens" target="_blank" rel="noopener" class="footer-insta">
+          @a3_kitchens
         </a>
       </div>
-    </div>
 
-    <div class="container copyright">
-      <p>© 2026 A3 Kitchen. All rights reserved. Digital Restaurant Menu Concept.</p>
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom">
+        <p class="copyright-text">© A3 Kitchen, Dwarka, Tirumala. Designed as an In-House QR Dining Companion.</p>
+      </div>
     </div>
   </footer>
 
-  <!-- Food Details Modal -->
-  <div class="modal" id="foodModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalDishTitle">
-    <div class="modal-backdrop" id="closeFoodBackdrop"></div>
-    <div class="modal-card food-modal-card">
-      <button class="modal-close" id="closeFoodModal" type="button" aria-label="Close food details">&times;</button>
-      <div class="food-modal-media">
-        <img class="food-modal-img" id="modalFoodImg" src="" alt="" />
+  <!-- ======================================================================
+       PART 5 — FOOD DETAIL EXPERIENCE (Illustrated Plate Sheet Modal)
+       Large image, name, description, veg/non-veg, price, close button, tactile zoom
+       ====================================================================== -->
+  <div class="modal-backdrop" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="mt">
+    <div class="modal-window sketchbook-sheet">
+      <div class="sheet-drag-handle" aria-hidden="true"></div>
+      <button class="modal-close-btn" id="close" aria-label="Close food details">✕</button>
+      
+      <div class="modal-img-wrap" id="modalImgWrap">
+        <img id="mi" src="" alt="Food item photography" loading="lazy">
+        <!-- Interactive Modal Loupe -->
+        <div class="sketchbook-loupe modal-loupe" id="modalLoupe" aria-hidden="true">
+          <div class="loupe-lens" id="modalLoupeLens"></div>
+          <div class="loupe-crosshair"></div>
+          <div class="loupe-glare"></div>
+          <div class="loupe-tag">2.5× ZOOM</div>
+        </div>
+        <button class="btn-modal-inspect" id="modalInspectToggle" aria-label="Toggle dish magnification">
+          <span class="inspect-icon">🔍</span> Inspect
+        </button>
       </div>
-      <div class="food-modal-body">
-        <div class="food-modal-meta">
-          <span class="diet-indicator" id="modalFoodDiet"></span>
-          <span class="food-modal-type" id="modalFoodDietLabel"></span>
-          <span class="food-modal-category" id="modalFoodCategory"></span>
-        </div>
-        <h3 class="food-modal-title" id="modalDishTitle"></h3>
-        <p class="food-modal-desc" id="modalDishDesc"></p>
-        <div class="food-modal-footer">
-          <div class="food-modal-price-box">
-            <span class="food-modal-price-label">Price</span>
-            <span class="food-modal-price" id="modalDishPrice"></span>
+
+      <div class="modal-details-body">
+        <span class="modal-plate-kicker" id="mPlateKicker">FOLIO II · ARCHIVAL PLATE</span>
+        <div class="modal-diet-row">
+          <div class="diet-indicator" id="mdietInd">
+            <span class="diet-box"><span class="diet-dot"></span></span>
+            <span class="diet-label" id="mc"></span>
           </div>
-          <span class="food-modal-note">Prepared fresh to order. Please inform your server of any dietary preferences.</span>
         </div>
+        <h3 class="modal-title" id="mt"></h3>
+        <p class="modal-desc" id="md"></p>
+        <div class="modal-price" id="mp"></div>
+        <button class="btn-outline-dark modal-close-action" id="modalCloseActionBtn">Close Plate</button>
       </div>
     </div>
   </div>
 
-  <!-- Book Table Modal -->
-  <div class="modal" id="bookingModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
-    <div class="modal-backdrop" id="closeBookingBackdrop"></div>
-    <div class="modal-card booking-modal-card">
-      <button class="modal-close" id="closeBooking" type="button" aria-label="Close reservation form">&times;</button>
-      <p class="eyebrow">RESERVATION</p>
-      <h2 class="modal-heading" id="bookingTitle">Book a Table</h2>
-      <p class="modal-subheading">Submit your dining request and our team will confirm your table shortly.</p>
-
-      <form class="booking-form" id="bookingForm" novalidate>
-        <div class="form-group">
-          <label for="bookName">Name</label>
-          <input required type="text" id="bookName" name="name" placeholder="Full name" autocomplete="name" />
-        </div>
-
-        <div class="form-group">
-          <label for="bookPhone">Phone Number</label>
-          <input required type="tel" id="bookPhone" name="phone" placeholder="+91 98765 43210" autocomplete="tel" />
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="bookDate">Date</label>
-            <input required type="date" id="bookDate" name="date" />
-          </div>
-          <div class="form-group">
-            <label for="bookTime">Time</label>
-            <input required type="time" id="bookTime" name="time" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="bookGuests">Number of Guests</label>
-          <select id="bookGuests" name="guests">
-            <option value="1 Guest">1 Guest</option>
-            <option value="2 Guests" selected>2 Guests</option>
-            <option value="3 Guests">3 Guests</option>
-            <option value="4 Guests">4 Guests</option>
-            <option value="5-6 Guests">5 – 6 Guests</option>
-            <option value="7+ Guests">7+ Guests (Large Party)</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="bookSpecialRequest">Special Request</label>
-          <textarea id="bookSpecialRequest" name="specialRequest" rows="2" placeholder="Seating preference, anniversary, dietary notes, high chair, etc."></textarea>
-        </div>
-
-        <button class="primary-button form-submit-button" type="submit">Request Reservation</button>
-      </form>
-
-      <div class="form-message" id="formMessage" aria-live="polite"></div>
+  <!-- GALLERY LIGHTBOX MODAL -->
+  <div class="modal-backdrop" id="galleryModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="galleryTitle">
+    <div class="gallery-window sketchbook-sheet">
+      <button class="modal-close-btn" id="galleryClose" aria-label="Close gallery">✕</button>
+      <span class="section-kicker gold-kicker"><span class="kicker-leaf">❦</span> FOLIO IV · ARCHIVE</span>
+      <h3 class="gallery-title" id="galleryTitle">A3 Kitchen Atmosphere</h3>
+      <p class="gallery-subtitle">An inside look at our dining spaces and culinary craft.</p>
+      <div class="gallery-grid">
+        <img src="assets/images/hero.jpg" alt="A3 Kitchen Exterior" loading="lazy">
+        <img src="assets/images/experience-interior.jpg" alt="Dining Room" loading="lazy">
+        <img src="assets/images/about-interior.jpg" alt="Evening Ambiance" loading="lazy">
+        <img src="assets/images/dum-cooking.jpg" alt="Dum Cooking" loading="lazy">
+        <img src="assets/images/mutton-biryani-special.jpg" alt="Special Biryani" loading="lazy">
+        <img src="assets/images/mango-lassi.jpg" alt="Artisan Mango Lassi" loading="lazy">
+      </div>
     </div>
   </div>
 
+  <!-- RESERVATION CONFIRMATION MODAL (DEMO REQUEST PREPARED) -->
+  <div class="modal-backdrop" id="bookingSuccessModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+    <div class="success-modal-card sketchbook-sheet">
+      <div class="success-icon-badge">✓</div>
+      <span class="demo-badge">In-House Demo Mode</span>
+      <h3 class="success-modal-title" id="successTitle">Reservation Request Prepared</h3>
+      <p class="success-modal-body" id="successModalBody">
+        Your table reservation request has been prepared for the hospitality host.
+      </p>
+      <div class="booking-receipt" id="bookingReceipt"></div>
+      <button class="btn-pill-dark" id="btnDoneBooking">Done</button>
+    </div>
+  </div>
+
+  <script src="three.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
